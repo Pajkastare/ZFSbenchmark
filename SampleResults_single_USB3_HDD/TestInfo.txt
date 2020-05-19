@@ -1,0 +1,5 @@
+The test results in the subdirectories were created on Raspberry Pi 4 (4 GB), 
+using a zpool with a single vdev on an external USB3 mechanical HDD.
+
+OpenZFS on Linux 0.8.3 was used on Ubuntu 20.04 LTS, with the 5.4.0 Linux kernel.
+
