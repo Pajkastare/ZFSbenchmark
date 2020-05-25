@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# About:		Version 0.8.1		GPLv3
-# 2020-05-18
+# About:		Version 0.8.2		GPLv3
+# 2020-05-22
 #
 # This script is used to benchmark write I/O for various ZFS options.
 # Read I/O is not tested (if it should, clear the ARC between each test).

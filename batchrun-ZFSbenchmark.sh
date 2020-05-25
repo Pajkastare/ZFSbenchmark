@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# About:                Version 0.8.2           GPLv3
+# 2020-05-25
+#
+# Helper/companion script to ZFSbenchmark.sh, to automate the benchmarks.
+
+
 echo -e "\nBatch run of ZFSbenchmark.sh:"
 echo -e   "-----------------------------"
 echo -e "\tIn order to use this script to run ZFSbenchmark.sh to test performance on datasets"
@@ -32,6 +38,6 @@ fi
 
 
 
-echo "\nDone, test sequence complete.\n\n"
+echo -e "\nDone, test sequence complete.\n\n"
 exit 0
 
