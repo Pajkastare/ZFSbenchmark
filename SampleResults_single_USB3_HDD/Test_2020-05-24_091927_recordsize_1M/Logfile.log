@@ -1,0 +1,1295 @@
+***********************************************
+./ZFSbenchmark_backuppool.sh, started at 2020-05-24_091927
+***********************************************
+
+List of test cases (>= 1 measurement per TC, each of which is >= 60 seconds):
+Test case #1:	COMPoffENCoff-000-xxx	(off / off)
+Test case #2:	COMPlz4ENCoff-000-xxx	(lz4 / off)
+Test case #3:	COMPoffENCaes-128-ccm	(off / aes-128-ccm)
+Test case #4:	COMPoffENCaes-192-ccm	(off / aes-192-ccm)
+Test case #5:	COMPoffENCaes-256-ccm	(off / aes-256-ccm)
+Test case #6:	COMPoffENCaes-128-gcm	(off / aes-128-gcm)
+Test case #7:	COMPoffENCaes-192-gcm	(off / aes-192-gcm)
+Test case #8:	COMPoffENCaes-256-gcm	(off / aes-256-gcm)
+Test case #9:	COMPlz4ENCaes-128-ccm	(lz4 / aes-128-ccm)
+Test case #10:	COMPlz4ENCaes-192-ccm	(lz4 / aes-192-ccm)
+Test case #11:	COMPlz4ENCaes-256-ccm	(lz4 / aes-256-ccm)
+Test case #12:	COMPlz4ENCaes-128-gcm	(lz4 / aes-128-gcm)
+Test case #13:	COMPlz4ENCaes-192-gcm	(lz4 / aes-192-gcm)
+Test case #14:	COMPlz4ENCaes-256-gcm	(lz4 / aes-256-gcm)
+
+
+Creating the main test dataset (custom parameters to "zfs create": "-o recordsize=1M")
+Creating an encryption key
+Creating all test case datasets
+
+
+***********************
+ [*] Starting test case #1/14:	COMPoffENCoff-000-xxx	(off / off)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=81, BW=326KiB/s (333kB/s)(19.2MiB/60379msec); 0 zone resets
+  WRITE: bw=326KiB/s (333kB/s), 326KiB/s-326KiB/s (333kB/s-333kB/s), io=19.2MiB (20.1MB), run=60379-60379msec
+   iops        : min=    2, max=  537, avg=90.84, stdev=79.24, samples=108
+
+                [*] This took 1m2.355s, IOPS/process was about 81 (first occurrence), during which
+                    2831MiB of user data was stored (logicalused) at 45.4MiB/s, but compression/metadata/ZFS magic
+                    meant that 2831MiB was actually written to disk (used) at 45.4MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=4, BW=288KiB/s (295kB/s)(19.0MiB/67582msec); 0 zone resets
+      1   write: IOPS=4, BW=274KiB/s (280kB/s)(18.1MiB/67585msec); 0 zone resets
+      1   write: IOPS=3, BW=225KiB/s (231kB/s)(16.0MiB/72757msec); 0 zone resets
+      1   write: IOPS=4, BW=264KiB/s (270kB/s)(18.8MiB/72749msec); 0 zone resets
+      1   write: IOPS=3, BW=237KiB/s (242kB/s)(16.8MiB/72743msec); 0 zone resets
+      1   write: IOPS=4, BW=262KiB/s (268kB/s)(18.6MiB/72743msec); 0 zone resets
+      1   write: IOPS=4, BW=280KiB/s (286kB/s)(19.9MiB/72750msec); 0 zone resets
+      1   write: IOPS=4, BW=258KiB/s (264kB/s)(17.0MiB/67583msec); 0 zone resets
+      1   write: IOPS=3, BW=234KiB/s (240kB/s)(16.6MiB/72752msec); 0 zone resets
+      1   write: IOPS=3, BW=238KiB/s (243kB/s)(16.9MiB/72742msec); 0 zone resets
+      1   write: IOPS=3, BW=252KiB/s (259kB/s)(17.9MiB/72747msec); 0 zone resets
+      1   write: IOPS=4, BW=303KiB/s (310kB/s)(20.0MiB/67584msec); 0 zone resets
+      1   write: IOPS=4, BW=288KiB/s (295kB/s)(19.0MiB/67591msec); 0 zone resets
+      1   write: IOPS=4, BW=318KiB/s (326kB/s)(21.0MiB/67587msec); 0 zone resets
+      1   write: IOPS=3, BW=236KiB/s (241kB/s)(16.8MiB/72746msec); 0 zone resets
+      1   write: IOPS=4, BW=266KiB/s (272kB/s)(18.9MiB/72745msec); 0 zone resets
+      1   WRITE: bw=4098KiB/s (4197kB/s), 225KiB/s-318KiB/s (231kB/s-326kB/s), io=291MiB (305MB), run=67582-72757msec
+   iops        : min=    1, max=   32, avg=10.80, stdev= 9.36, samples=54
+   iops        : min=    1, max=   34, avg= 9.79, stdev= 8.86, samples=57
+   iops        : min=    2, max=   87, avg=11.23, stdev=14.97, samples=44
+   iops        : min=    2, max=   32, avg=10.09, stdev= 9.49, samples=56
+   iops        : min=    1, max=   32, avg=10.42, stdev=10.51, samples=48
+   iops        : min=    1, max=   50, avg=11.43, stdev=11.43, samples=49
+   iops        : min=    1, max=   63, avg=11.36, stdev=12.00, samples=53
+   iops        : min=    1, max=   32, avg= 8.54, stdev= 8.72, samples=61
+   iops        : min=    1, max=   58, avg= 9.61, stdev=10.42, samples=51
+   iops        : min=    1, max=   56, avg= 9.58, stdev=10.73, samples=53
+   iops        : min=    2, max=   32, avg=10.59, stdev= 9.68, samples=51
+   iops        : min=    1, max=   56, avg=11.00, stdev=11.03, samples=56
+   iops        : min=    2, max=   64, avg=11.59, stdev=11.58, samples=51
+   iops        : min=    2, max=   60, avg=11.25, stdev=11.39, samples=57
+   iops        : min=    1, max=   32, avg= 9.24, stdev= 9.19, samples=54
+   iops        : min=    1, max=   56, avg=10.41, stdev=11.00, samples=54
+
+                [*] This took 1m14.606s, IOPS/process was about 4 (first occurrence), during which
+                    2747MiB of user data was stored (logicalused) at 36.8MiB/s, but compression/metadata/ZFS magic
+                    meant that 2747MiB was actually written to disk (used) at 36.8MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=75, BW=75.6MiB/s (79.3MB/s)(5249MiB/69419msec); 0 zone resets
+  WRITE: bw=75.6MiB/s (79.3MB/s), 75.6MiB/s-75.6MiB/s (79.3MB/s-79.3MB/s), io=5249MiB (5504MB), run=69419-69419msec
+   iops        : min=    2, max=  658, avg=91.87, stdev=65.99, samples=114
+
+                [*] This took 1m11.246s, IOPS/process was about 75 (first occurrence), during which
+                    5249MiB of user data was stored (logicalused) at 73.6MiB/s, but compression/metadata/ZFS magic
+                    meant that 5249MiB was actually written to disk (used) at 73.6MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #2/14:	COMPlz4ENCoff-000-xxx	(lz4 / off)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=328, BW=1314KiB/s (1345kB/s)(77.7MiB/60556msec); 0 zone resets
+  WRITE: bw=1314KiB/s (1345kB/s), 1314KiB/s-1314KiB/s (1345kB/s-1345kB/s), io=77.7MiB (81.5MB), run=60556-60556msec
+   iops        : min=    2, max=  814, avg=385.84, stdev=283.90, samples=103
+
+                [*] This took 1m2.402s, IOPS/process was about 328 (first occurrence), during which
+                    4068MiB of user data was stored (logicalused) at 65.1MiB/s, but compression/metadata/ZFS magic
+                    meant that 80MiB was actually written to disk (used) at 1.2MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=7, BW=512KiB/s (524kB/s)(32.8MiB/65630msec); 0 zone resets
+      1   write: IOPS=8, BW=527KiB/s (540kB/s)(33.8MiB/65640msec); 0 zone resets
+      1   write: IOPS=8, BW=546KiB/s (559kB/s)(35.0MiB/65632msec); 0 zone resets
+      1   write: IOPS=8, BW=570KiB/s (584kB/s)(36.6MiB/65653msec); 0 zone resets
+      1   write: IOPS=8, BW=569KiB/s (582kB/s)(36.4MiB/65632msec); 0 zone resets
+      1   write: IOPS=8, BW=516KiB/s (528kB/s)(33.1MiB/65639msec); 0 zone resets
+      1   write: IOPS=7, BW=498KiB/s (510kB/s)(31.9MiB/65645msec); 0 zone resets
+      1   write: IOPS=8, BW=537KiB/s (550kB/s)(34.4MiB/65630msec); 0 zone resets
+      1   write: IOPS=11, BW=709KiB/s (726kB/s)(45.4MiB/65635msec); 0 zone resets
+      1   write: IOPS=7, BW=500KiB/s (512kB/s)(32.1MiB/65637msec); 0 zone resets
+      1   write: IOPS=10, BW=684KiB/s (700kB/s)(43.8MiB/65635msec); 0 zone resets
+      1   write: IOPS=8, BW=529KiB/s (541kB/s)(33.9MiB/65629msec); 0 zone resets
+      1   write: IOPS=8, BW=564KiB/s (577kB/s)(36.1MiB/65643msec); 0 zone resets
+      1   write: IOPS=8, BW=516KiB/s (528kB/s)(33.1MiB/65630msec); 0 zone resets
+      1   write: IOPS=7, BW=512KiB/s (524kB/s)(32.8MiB/65648msec); 0 zone resets
+      1   write: IOPS=7, BW=510KiB/s (522kB/s)(32.7MiB/65640msec); 0 zone resets
+      1   WRITE: bw=8796KiB/s (9007kB/s), 498KiB/s-709KiB/s (510kB/s-726kB/s), io=564MiB (591MB), run=65629-65653msec
+   iops        : min=    1, max=   60, avg=17.70, stdev=17.99, samples=57
+   iops        : min=    2, max=  112, avg=18.64, stdev=19.35, samples=56
+   iops        : min=    1, max=   66, avg=17.57, stdev=17.19, samples=61
+   iops        : min=    1, max=   84, avg=17.03, stdev=18.95, samples=66
+   iops        : min=    1, max=   66, avg=18.34, stdev=17.61, samples=61
+   iops        : min=    2, max=   98, avg=15.52, stdev=17.05, samples=66
+   iops        : min=    1, max=   64, avg=15.65, stdev=14.30, samples=63
+   iops        : min=    1, max=  122, avg=17.18, stdev=20.03, samples=62
+   iops        : min=    1, max=  282, avg=24.28, stdev=39.54, samples=58
+   iops        : min=    1, max=   66, avg=18.81, stdev=17.20, samples=52
+   iops        : min=    1, max=  166, avg=22.10, stdev=28.83, samples=61
+   iops        : min=    1, max=  126, avg=20.04, stdev=21.75, samples=52
+   iops        : min=    1, max=   94, avg=18.81, stdev=18.88, samples=59
+   iops        : min=    1, max=   96, avg=18.42, stdev=17.78, samples=55
+   iops        : min=    1, max=   64, avg=15.18, stdev=15.37, samples=66
+   iops        : min=    1, max=   85, avg=16.39, stdev=17.19, samples=61
+
+                [*] This took 1m7.510s, IOPS/process was about 7 (first occurrence), during which
+                    3642MiB of user data was stored (logicalused) at 53.9MiB/s, but compression/metadata/ZFS magic
+                    meant that 558MiB was actually written to disk (used) at 8.2MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=14, BW=14.9MiB/s (15.6MB/s)(1207MiB/81191msec); 0 zone resets
+  WRITE: bw=14.9MiB/s (15.6MB/s), 14.9MiB/s-14.9MiB/s (15.6MB/s-15.6MB/s), io=1207MiB (1266MB), run=81191-81191msec
+   iops        : min=    2, max=  600, avg=22.44, stdev=63.62, samples=107
+
+                [*] This took 1m23.112s, IOPS/process was about 14 (first occurrence), during which
+                    1207MiB of user data was stored (logicalused) at 14.5MiB/s, but compression/metadata/ZFS magic
+                    meant that 1207MiB was actually written to disk (used) at 14.5MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #3/14:	COMPoffENCaes-128-ccm	(off / aes-128-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=36, BW=148KiB/s (151kB/s)(8908KiB/60240msec); 0 zone resets
+  WRITE: bw=148KiB/s (151kB/s), 148KiB/s-148KiB/s (151kB/s-151kB/s), io=8908KiB (9122kB), run=60240-60240msec
+   iops        : min=    2, max=  792, avg=42.92, stdev=78.24, samples=103
+
+                [*] This took 1m2.362s, IOPS/process was about 36 (first occurrence), during which
+                    1704MiB of user data was stored (logicalused) at 27.3MiB/s, but compression/metadata/ZFS magic
+                    meant that 1704MiB was actually written to disk (used) at 27.3MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=1, BW=126KiB/s (129kB/s)(9216KiB/73325msec); 0 zone resets
+      1   write: IOPS=1, BW=125KiB/s (128kB/s)(9152KiB/73326msec); 0 zone resets
+      1   write: IOPS=1, BW=126KiB/s (129kB/s)(9216KiB/73328msec); 0 zone resets
+      1   write: IOPS=2, BW=131KiB/s (134kB/s)(9856KiB/75379msec); 0 zone resets
+      1   write: IOPS=2, BW=137KiB/s (140kB/s)(10.1MiB/75370msec); 0 zone resets
+      1   write: IOPS=2, BW=191KiB/s (196kB/s)(12.1MiB/64667msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(9152KiB/75384msec); 0 zone resets
+      1   write: IOPS=1, BW=112KiB/s (114kB/s)(8192KiB/73325msec); 0 zone resets
+      1   write: IOPS=2, BW=135KiB/s (138kB/s)(9.94MiB/75370msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(8896KiB/73326msec); 0 zone resets
+      1   write: IOPS=2, BW=140KiB/s (143kB/s)(10.0MiB/73325msec); 0 zone resets
+      1   write: IOPS=1, BW=117KiB/s (120kB/s)(8832KiB/75372msec); 0 zone resets
+      1   write: IOPS=2, BW=148KiB/s (152kB/s)(10.9MiB/75424msec); 0 zone resets
+      1   write: IOPS=1, BW=108KiB/s (110kB/s)(8128KiB/75371msec); 0 zone resets
+      1   write: IOPS=1, BW=120KiB/s (123kB/s)(9024KiB/75375msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(9152KiB/75371msec); 0 zone resets
+      1   WRITE: bw=2030KiB/s (2078kB/s), 108KiB/s-191KiB/s (110kB/s-196kB/s), io=150MiB (157MB), run=64667-75424msec
+   iops        : min=    1, max=   34, avg=11.18, stdev=11.26, samples=22
+   iops        : min=    1, max=   32, avg=11.71, stdev=10.20, samples=21
+   iops        : min=    1, max=   40, avg=11.86, stdev=11.65, samples=22
+   iops        : min=    2, max=   68, avg=19.64, stdev=17.11, samples=14
+   iops        : min=    1, max=   33, avg=13.27, stdev=11.76, samples=22
+   iops        : min=    1, max=   68, avg=15.17, stdev=14.94, samples=23
+   iops        : min=    1, max=   34, avg=12.30, stdev=12.27, samples=20
+   iops        : min=    1, max=   64, avg=16.64, stdev=16.24, samples=14
+   iops        : min=    1, max=   34, avg=16.12, stdev=10.61, samples=17
+   iops        : min=    1, max=   30, avg=11.24, stdev=11.06, samples=21
+   iops        : min=    1, max=   56, avg=12.29, stdev=12.69, samples=24
+   iops        : min=    2, max=   32, avg=13.17, stdev=10.03, samples=18
+   iops        : min=    1, max=   54, avg=18.18, stdev=14.85, samples=17
+   iops        : min=    1, max=   30, avg=11.10, stdev=10.95, samples=20
+   iops        : min=    1, max=   31, avg=12.53, stdev= 9.59, samples=19
+   iops        : min=    1, max=   37, avg=14.33, stdev=12.24, samples=18
+
+                [*] This took 1m17.996s, IOPS/process was about 1 (first occurrence), during which
+                    1808MiB of user data was stored (logicalused) at 23.1MiB/s, but compression/metadata/ZFS magic
+                    meant that 1808MiB was actually written to disk (used) at 23.1MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=49, BW=49.8MiB/s (52.3MB/s)(4608MiB/92472msec); 0 zone resets
+  WRITE: bw=49.8MiB/s (52.3MB/s), 49.8MiB/s-49.8MiB/s (52.3MB/s-52.3MB/s), io=4608MiB (4832MB), run=92472-92472msec
+   iops        : min=    2, max=  490, avg=79.91, stdev=51.19, samples=115
+
+                [*] This took 1m34.484s, IOPS/process was about 49 (first occurrence), during which
+                    4608MiB of user data was stored (logicalused) at 48.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 4608MiB was actually written to disk (used) at 48.7MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #4/14:	COMPoffENCaes-192-ccm	(off / aes-192-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=22, BW=88.9KiB/s (91.1kB/s)(5476KiB/61576msec); 0 zone resets
+  WRITE: bw=88.9KiB/s (91.1kB/s), 88.9KiB/s-88.9KiB/s (91.1kB/s-91.1kB/s), io=5476KiB (5607kB), run=61576-61576msec
+   iops        : min=    6, max=  804, avg=53.41, stdev=108.85, samples=51
+
+                [*] This took 1m3.786s, IOPS/process was about 22 (first occurrence), during which
+                    1156MiB of user data was stored (logicalused) at 18.1MiB/s, but compression/metadata/ZFS magic
+                    meant that 1156MiB was actually written to disk (used) at 18.1MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=1, BW=94.7KiB/s (96.9kB/s)(9216KiB/97358msec); 0 zone resets
+      1   write: IOPS=1, BW=71.0KiB/s (72.7kB/s)(6912KiB/97343msec); 0 zone resets
+      1   write: IOPS=1, BW=116KiB/s (119kB/s)(8256KiB/71119msec); 0 zone resets
+      1   write: IOPS=1, BW=82.2KiB/s (84.1kB/s)(8000KiB/97352msec); 0 zone resets
+      1   write: IOPS=1, BW=90.7KiB/s (92.9kB/s)(8832KiB/97343msec); 0 zone resets
+      1   write: IOPS=1, BW=73.6KiB/s (75.4kB/s)(7168KiB/97346msec); 0 zone resets
+      1   write: IOPS=1, BW=82.9KiB/s (84.9kB/s)(8128KiB/98061msec); 0 zone resets
+      1   write: IOPS=1, BW=72.4KiB/s (74.2kB/s)(7104KiB/98055msec); 0 zone resets
+      1   write: IOPS=1, BW=106KiB/s (108kB/s)(10.1MiB/97356msec); 0 zone resets
+      1   write: IOPS=1, BW=84.2KiB/s (86.2kB/s)(8192KiB/97344msec); 0 zone resets
+      1   write: IOPS=1, BW=92.7KiB/s (94.9kB/s)(9024KiB/97346msec); 0 zone resets
+      1   write: IOPS=1, BW=93.3KiB/s (95.6kB/s)(9152KiB/98053msec); 0 zone resets
+      1   write: IOPS=1, BW=118KiB/s (121kB/s)(8192KiB/69613msec); 0 zone resets
+      1   write: IOPS=1, BW=83.5KiB/s (85.5kB/s)(8192KiB/98057msec); 0 zone resets
+      1   write: IOPS=1, BW=72.5KiB/s (74.2kB/s)(7104KiB/98053msec); 0 zone resets
+      1   write: IOPS=1, BW=82.2KiB/s (84.2kB/s)(8000KiB/97346msec); 0 zone resets
+      1   WRITE: bw=1344KiB/s (1376kB/s), 71.0KiB/s-118KiB/s (72.7kB/s-121kB/s), io=129MiB (135MB), run=69613-98061msec
+   iops        : min=    1, max=   64, avg=15.59, stdev=17.58, samples=17
+   iops        : min=    1, max=   32, avg=16.45, stdev=13.41, samples=11
+   iops        : min=    1, max=   95, avg=14.69, stdev=23.06, samples=16
+   iops        : min=    2, max=   55, avg=15.20, stdev=15.21, samples=15
+   iops        : min=    1, max=   58, avg=15.00, stdev=15.58, samples=16
+   iops        : min=    2, max=   32, avg=12.81, stdev=10.28, samples=16
+   iops        : min=    1, max=   64, avg=16.85, stdev=18.21, samples=13
+   iops        : min=    2, max=   41, avg=17.09, stdev=14.49, samples=11
+   iops        : min=    2, max=   58, avg=18.69, stdev=18.97, samples=16
+   iops        : min=    1, max=   35, avg=16.79, stdev=13.06, samples=14
+   iops        : min=    1, max=   39, avg=17.71, stdev=13.19, samples=14
+   iops        : min=    1, max=   35, avg=13.32, stdev=10.27, samples=19
+   iops        : min=    2, max=   45, avg=15.71, stdev=13.89, samples=14
+   iops        : min=    2, max=   32, avg=16.86, stdev=11.39, samples=14
+   iops        : min=    1, max=   31, avg=13.00, stdev= 9.70, samples=15
+   iops        : min=    1, max=   36, avg=11.26, stdev=11.64, samples=19
+
+                [*] This took 1m40.549s, IOPS/process was about 1 (first occurrence), during which
+                    1627MiB of user data was stored (logicalused) at 16.1MiB/s, but compression/metadata/ZFS magic
+                    meant that 1627MiB was actually written to disk (used) at 16.1MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=43, BW=43.9MiB/s (46.0MB/s)(3152MiB/71838msec); 0 zone resets
+  WRITE: bw=43.9MiB/s (46.0MB/s), 43.9MiB/s-43.9MiB/s (46.0MB/s-46.0MB/s), io=3152MiB (3305MB), run=71838-71838msec
+   iops        : min=    2, max=  598, avg=57.94, stdev=61.75, samples=108
+
+                [*] This took 1m13.862s, IOPS/process was about 43 (first occurrence), during which
+                    3152MiB of user data was stored (logicalused) at 42.6MiB/s, but compression/metadata/ZFS magic
+                    meant that 3152MiB was actually written to disk (used) at 42.6MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #5/14:	COMPoffENCaes-256-ccm	(off / aes-256-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=37, BW=150KiB/s (153kB/s)(9016KiB/60209msec); 0 zone resets
+  WRITE: bw=150KiB/s (153kB/s), 150KiB/s-150KiB/s (153kB/s-153kB/s), io=9016KiB (9232kB), run=60209-60209msec
+   iops        : min=    2, max=  766, avg=40.83, stdev=72.83, samples=109
+
+                [*] This took 1m2.410s, IOPS/process was about 37 (first occurrence), during which
+                    1717MiB of user data was stored (logicalused) at 27.5MiB/s, but compression/metadata/ZFS magic
+                    meant that 1717MiB was actually written to disk (used) at 27.5MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=2, BW=160KiB/s (164kB/s)(12.6MiB/80564msec); 0 zone resets
+      1   write: IOPS=2, BW=139KiB/s (142kB/s)(10.9MiB/80551msec); 0 zone resets
+      1   write: IOPS=2, BW=151KiB/s (155kB/s)(11.9MiB/80563msec); 0 zone resets
+      1   write: IOPS=2, BW=163KiB/s (167kB/s)(12.8MiB/80495msec); 0 zone resets
+      1   write: IOPS=2, BW=174KiB/s (178kB/s)(13.7MiB/80553msec); 0 zone resets
+      1   write: IOPS=2, BW=132KiB/s (136kB/s)(10.4MiB/80704msec); 0 zone resets
+      1   write: IOPS=2, BW=150KiB/s (154kB/s)(11.8MiB/80493msec); 0 zone resets
+      1   write: IOPS=2, BW=153KiB/s (157kB/s)(10.9MiB/72721msec); 0 zone resets
+      1   write: IOPS=2, BW=166KiB/s (170kB/s)(13.1MiB/80489msec); 0 zone resets
+      1   write: IOPS=2, BW=140KiB/s (143kB/s)(11.0MiB/80703msec); 0 zone resets
+      1   write: IOPS=2, BW=137KiB/s (140kB/s)(10.8MiB/80549msec); 0 zone resets
+      1   write: IOPS=2, BW=159KiB/s (163kB/s)(11.0MiB/70727msec); 0 zone resets
+      1   write: IOPS=2, BW=160KiB/s (164kB/s)(12.6MiB/80553msec); 0 zone resets
+      1   write: IOPS=2, BW=159KiB/s (163kB/s)(11.0MiB/70727msec); 0 zone resets
+      1   write: IOPS=2, BW=160KiB/s (164kB/s)(12.6MiB/80553msec); 0 zone resets
+      1   write: IOPS=2, BW=142KiB/s (145kB/s)(11.1MiB/80486msec); 0 zone resets
+      1   WRITE: bw=2387KiB/s (2444kB/s), 132KiB/s-174KiB/s (136kB/s-178kB/s), io=188MiB (197MB), run=70727-80704msec
+   iops        : min=    1, max=   33, avg=12.74, stdev=11.49, samples=27
+   iops        : min=    1, max=   31, avg=11.04, stdev=10.18, samples=27
+   iops        : min=    1, max=   32, avg=11.24, stdev=10.78, samples=29
+   iops        : min=    1, max=   31, avg= 9.10, stdev= 9.13, samples=39
+   iops        : min=    1, max=   45, avg=11.06, stdev=11.67, samples=35
+   iops        : min=    1, max=   40, avg= 9.13, stdev= 8.72, samples=31
+   iops        : min=    1, max=   33, avg= 9.00, stdev= 8.91, samples=36
+   iops        : min=    1, max=   50, avg= 9.45, stdev=11.08, samples=31
+   iops        : min=    1, max=   48, avg=12.16, stdev=12.01, samples=31
+   iops        : min=    1, max=   31, avg=11.32, stdev=10.00, samples=28
+   iops        : min=    1, max=   31, avg= 9.45, stdev= 9.00, samples=31
+   iops        : min=    1, max=   31, avg= 8.32, stdev= 9.12, samples=38
+   iops        : min=    1, max=   59, avg=12.14, stdev=15.41, samples=29
+   iops        : min=    1, max=   52, avg=10.93, stdev=11.63, samples=29
+   iops        : min=    1, max=   59, avg=10.44, stdev=11.30, samples=34
+   iops        : min=    1, max=   53, avg=13.25, stdev=11.81, samples=24
+
+                [*] This took 1m23.229s, IOPS/process was about 2 (first occurrence), during which
+                    2124MiB of user data was stored (logicalused) at 25.5MiB/s, but compression/metadata/ZFS magic
+                    meant that 2124MiB was actually written to disk (used) at 25.5MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=36, BW=36.9MiB/s (38.7MB/s)(3389MiB/91865msec); 0 zone resets
+  WRITE: bw=36.9MiB/s (38.7MB/s), 36.9MiB/s-36.9MiB/s (38.7MB/s-38.7MB/s), io=3389MiB (3554MB), run=91865-91865msec
+   iops        : min=    4, max=  544, avg=57.09, stdev=52.90, samples=118
+
+                [*] This took 1m34.075s, IOPS/process was about 36 (first occurrence), during which
+                    3389MiB of user data was stored (logicalused) at 36.0MiB/s, but compression/metadata/ZFS magic
+                    meant that 3389MiB was actually written to disk (used) at 36.0MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #6/14:	COMPoffENCaes-128-gcm	(off / aes-128-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=26, BW=105KiB/s (107kB/s)(6652KiB/63550msec); 0 zone resets
+  WRITE: bw=105KiB/s (107kB/s), 105KiB/s-105KiB/s (107kB/s-107kB/s), io=6652KiB (6812kB), run=63550-63550msec
+   iops        : min=    4, max=  788, avg=32.41, stdev=77.13, samples=100
+
+                [*] This took 1m5.774s, IOPS/process was about 26 (first occurrence), during which
+                    1364MiB of user data was stored (logicalused) at 20.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 1364MiB was actually written to disk (used) at 20.7MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(8192KiB/67697msec); 0 zone resets
+      1   write: IOPS=1, BW=105KiB/s (107kB/s)(7936KiB/75642msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(8192KiB/67709msec); 0 zone resets
+      1   write: IOPS=1, BW=122KiB/s (125kB/s)(8256KiB/67706msec); 0 zone resets
+      1   write: IOPS=2, BW=135KiB/s (138kB/s)(9152KiB/67675msec); 0 zone resets
+      1   write: IOPS=1, BW=97.0KiB/s (100kB/s)(6144KiB/62705msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(8192KiB/67699msec); 0 zone resets
+      1   write: IOPS=1, BW=121KiB/s (124kB/s)(8192KiB/67709msec); 0 zone resets
+      1   write: IOPS=2, BW=130KiB/s (134kB/s)(8832KiB/67708msec); 0 zone resets
+      1   write: IOPS=1, BW=117KiB/s (120kB/s)(8832KiB/75640msec); 0 zone resets
+      1   write: IOPS=1, BW=111KiB/s (113kB/s)(7488KiB/67704msec); 0 zone resets
+      1   write: IOPS=1, BW=119KiB/s (122kB/s)(9024KiB/75642msec); 0 zone resets
+      1   write: IOPS=2, BW=135KiB/s (139kB/s)(10.0MiB/75649msec); 0 zone resets
+      1   write: IOPS=2, BW=130KiB/s (134kB/s)(8832KiB/67708msec); 0 zone resets
+      1   write: IOPS=1, BW=92.2KiB/s (94.4kB/s)(6976KiB/75646msec); 0 zone resets
+      1   write: IOPS=1, BW=118KiB/s (120kB/s)(8896KiB/75647msec); 0 zone resets
+      1   WRITE: bw=1763KiB/s (1805kB/s), 92.2KiB/s-135KiB/s (94.4kB/s-139kB/s), io=130MiB (137MB), run=62705-75649msec
+   iops        : min=    2, max=   64, avg=19.33, stdev=18.35, samples=12
+   iops        : min=    1, max=   26, avg=10.26, stdev= 8.42, samples=19
+   iops        : min=    1, max=   32, avg=12.76, stdev=10.44, samples=17
+   iops        : min=    1, max=   46, avg=14.06, stdev=12.98, samples=16
+   iops        : min=    3, max=   31, avg=16.29, stdev= 8.22, samples=14
+   iops        : min=    2, max=   31, avg=13.64, stdev=10.93, samples=11
+   iops        : min=    1, max=   28, avg=12.11, stdev=10.12, samples=18
+   iops        : min=    1, max=   51, avg=14.06, stdev=15.01, samples=16
+   iops        : min=    1, max=   60, avg=15.33, stdev=15.70, samples=15
+   iops        : min=    1, max=   52, avg=17.38, stdev=16.42, samples=13
+   iops        : min=    1, max=   37, avg=13.67, stdev=10.95, samples=15
+   iops        : min=    3, max=   32, avg=14.56, stdev=11.52, samples=16
+   iops        : min=    1, max=   94, avg=17.75, stdev=23.27, samples=16
+   iops        : min=    1, max=   58, avg=13.41, stdev=15.26, samples=17
+   iops        : min=    1, max=   32, avg=10.50, stdev=11.03, samples=16
+   iops        : min=    1, max=   50, avg=11.79, stdev=13.21, samples=19
+
+                [*] This took 1m18.216s, IOPS/process was about 1 (first occurrence), during which
+                    1638MiB of user data was stored (logicalused) at 20.9MiB/s, but compression/metadata/ZFS magic
+                    meant that 1638MiB was actually written to disk (used) at 20.9MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=30, BW=30.1MiB/s (31.5MB/s)(2192MiB/72898msec); 0 zone resets
+  WRITE: bw=30.1MiB/s (31.5MB/s), 30.1MiB/s-30.1MiB/s (31.5MB/s-31.5MB/s), io=2192MiB (2298MB), run=72898-72898msec
+   iops        : min=    8, max=  470, avg=37.22, stdev=47.91, samples=117
+
+                [*] This took 1m14.902s, IOPS/process was about 30 (first occurrence), during which
+                    2192MiB of user data was stored (logicalused) at 29.2MiB/s, but compression/metadata/ZFS magic
+                    meant that 2192MiB was actually written to disk (used) at 29.2MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #7/14:	COMPoffENCaes-192-gcm	(off / aes-192-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=24, BW=99.9KiB/s (102kB/s)(6044KiB/60473msec); 0 zone resets
+  WRITE: bw=99.9KiB/s (102kB/s), 99.9KiB/s-99.9KiB/s (102kB/s-102kB/s), io=6044KiB (6189kB), run=60473-60473msec
+   iops        : min=    2, max=  788, avg=32.66, stdev=80.64, samples=91
+
+                [*] This took 1m2.700s, IOPS/process was about 24 (first occurrence), during which
+                    1259MiB of user data was stored (logicalused) at 20.0MiB/s, but compression/metadata/ZFS magic
+                    meant that 1259MiB was actually written to disk (used) at 20.0MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=1, BW=117KiB/s (120kB/s)(9088KiB/77844msec); 0 zone resets
+      1   write: IOPS=1, BW=105KiB/s (108kB/s)(8192KiB/77824msec); 0 zone resets
+      1   write: IOPS=2, BW=158KiB/s (162kB/s)(12.0MiB/77831msec); 0 zone resets
+      1   write: IOPS=1, BW=103KiB/s (105kB/s)(8000KiB/77837msec); 0 zone resets
+      1   write: IOPS=1, BW=97.9KiB/s (100kB/s)(7616KiB/77826msec); 0 zone resets
+      1   write: IOPS=1, BW=100KiB/s (103kB/s)(7808KiB/77830msec); 0 zone resets
+      1   write: IOPS=1, BW=113KiB/s (115kB/s)(8768KiB/77843msec); 0 zone resets
+      1   write: IOPS=1, BW=105KiB/s (108kB/s)(8192KiB/77833msec); 0 zone resets
+      1   write: IOPS=1, BW=92.1KiB/s (94.3kB/s)(7168KiB/77832msec); 0 zone resets
+      1   write: IOPS=1, BW=107KiB/s (109kB/s)(8320KiB/77828msec); 0 zone resets
+      1   write: IOPS=1, BW=118KiB/s (120kB/s)(9152KiB/77844msec); 0 zone resets
+      1   write: IOPS=1, BW=78.9KiB/s (80.8kB/s)(6144KiB/77828msec); 0 zone resets
+      1   write: IOPS=1, BW=100KiB/s (103kB/s)(7808KiB/77832msec); 0 zone resets
+      1   write: IOPS=1, BW=120KiB/s (123kB/s)(9344KiB/77829msec); 0 zone resets
+      1   write: IOPS=1, BW=75.6KiB/s (77.5kB/s)(5888KiB/77834msec); 0 zone resets
+      1   write: IOPS=2, BW=155KiB/s (158kB/s)(11.8MiB/77828msec); 0 zone resets
+      1   WRITE: bw=1745KiB/s (1786kB/s), 75.6KiB/s-158KiB/s (77.5kB/s-162kB/s), io=133MiB (139MB), run=77824-77844msec
+   iops        : min=    1, max=   32, avg= 9.12, stdev=11.34, samples=24
+   iops        : min=    1, max=   83, avg=11.24, stdev=19.58, samples=17
+   iops        : min=    1, max=   49, avg=11.42, stdev=12.12, samples=26
+   iops        : min=    1, max=   37, avg=10.82, stdev=11.91, samples=17
+   iops        : min=    1, max=   32, avg= 8.55, stdev= 9.11, samples=20
+   iops        : min=    1, max=   29, avg= 8.30, stdev= 9.48, samples=20
+   iops        : min=    1, max=   28, avg= 9.04, stdev= 8.47, samples=24
+   iops        : min=    1, max=   89, avg=12.06, stdev=21.74, samples=17
+   iops        : min=    1, max=   33, avg=10.06, stdev=10.07, samples=17
+   iops        : min=    1, max=   88, avg=11.76, stdev=20.84, samples=17
+   iops        : min=    1, max=   53, avg= 9.61, stdev=12.27, samples=23
+   iops        : min=    1, max=   28, avg=10.14, stdev= 9.51, samples=14
+   iops        : min=    0, max=   34, avg=11.87, stdev=11.35, samples=15
+   iops        : min=    0, max=   30, avg=12.11, stdev= 9.91, samples=19
+   iops        : min=    1, max=   25, avg= 7.29, stdev= 8.08, samples=17
+   iops        : min=    0, max=   59, avg=10.70, stdev=13.94, samples=27
+
+                [*] This took 1m20.183s, IOPS/process was about 1 (first occurrence), during which
+                    1641MiB of user data was stored (logicalused) at 20.4MiB/s, but compression/metadata/ZFS magic
+                    meant that 1641MiB was actually written to disk (used) at 20.4MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=26, BW=26.1MiB/s (27.3MB/s)(2125MiB/81521msec); 0 zone resets
+  WRITE: bw=26.1MiB/s (27.3MB/s), 26.1MiB/s-26.1MiB/s (27.3MB/s-27.3MB/s), io=2125MiB (2228MB), run=81521-81521msec
+   iops        : min=    2, max=  594, avg=35.41, stdev=54.09, samples=119
+
+                [*] This took 1m23.559s, IOPS/process was about 26 (first occurrence), during which
+                    2125MiB of user data was stored (logicalused) at 25.4MiB/s, but compression/metadata/ZFS magic
+                    meant that 2125MiB was actually written to disk (used) at 25.4MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #8/14:	COMPoffENCaes-256-gcm	(off / aes-256-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=25, BW=103KiB/s (106kB/s)(6340KiB/61302msec); 0 zone resets
+  WRITE: bw=103KiB/s (106kB/s), 103KiB/s-103KiB/s (106kB/s-106kB/s), io=6340KiB (6492kB), run=61302-61302msec
+   iops        : min=    4, max=  422, avg=37.48, stdev=56.25, samples=79
+
+                [*] This took 1m3.547s, IOPS/process was about 25 (first occurrence), during which
+                    1308MiB of user data was stored (logicalused) at 20.5MiB/s, but compression/metadata/ZFS magic
+                    meant that 1308MiB was actually written to disk (used) at 20.5MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=1, BW=103KiB/s (106kB/s)(8448KiB/81963msec); 0 zone resets
+      1   write: IOPS=1, BW=88.2KiB/s (90.4kB/s)(7232KiB/81958msec); 0 zone resets
+      1   write: IOPS=1, BW=87.5KiB/s (89.6kB/s)(7168KiB/81896msec); 0 zone resets
+      1   write: IOPS=1, BW=87.5KiB/s (89.6kB/s)(7168KiB/81961msec); 0 zone resets
+      1   write: IOPS=2, BW=134KiB/s (137kB/s)(9280KiB/69240msec); 0 zone resets
+      1   write: IOPS=1, BW=108KiB/s (110kB/s)(8832KiB/81945msec); 0 zone resets
+      1   write: IOPS=1, BW=99.2KiB/s (102kB/s)(8128KiB/81951msec); 0 zone resets
+      1   write: IOPS=1, BW=88.2KiB/s (90.4kB/s)(7232KiB/81953msec); 0 zone resets
+      1   write: IOPS=1, BW=118KiB/s (121kB/s)(9664KiB/81890msec); 0 zone resets
+      1   write: IOPS=1, BW=104KiB/s (107kB/s)(7232KiB/69240msec); 0 zone resets
+      1   write: IOPS=1, BW=99.0KiB/s (102kB/s)(8192KiB/81950msec); 0 zone resets
+      1   write: IOPS=2, BW=138KiB/s (142kB/s)(11.1MiB/81948msec); 0 zone resets
+      1   write: IOPS=2, BW=131KiB/s (134kB/s)(10.5MiB/81945msec); 0 zone resets
+      1   write: IOPS=1, BW=106KiB/s (108kB/s)(8768KiB/82774msec); 0 zone resets
+      1   write: IOPS=1, BW=97.6KiB/s (99.0kB/s)(8000KiB/81951msec); 0 zone resets
+      1   write: IOPS=1, BW=123KiB/s (126kB/s)(9.94MiB/82773msec); 0 zone resets
+      1   WRITE: bw=1662KiB/s (1702kB/s), 87.5KiB/s-138KiB/s (89.6kB/s-142kB/s), io=134MiB (141MB), run=69240-82774msec
+   iops        : min=    1, max=   52, avg= 9.95, stdev=11.83, samples=22
+   iops        : min=    1, max=   31, avg=10.16, stdev= 9.91, samples=19
+   iops        : min=    1, max=   33, avg= 8.41, stdev= 9.24, samples=22
+   iops        : min=    1, max=   32, avg= 7.88, stdev= 9.43, samples=24
+   iops        : min=    1, max=   32, avg=11.32, stdev=10.82, samples=22
+   iops        : min=    1, max=   31, avg= 9.74, stdev=10.12, samples=23
+   iops        : min=    1, max=   41, avg= 8.12, stdev= 8.88, samples=25
+   iops        : min=    1, max=   27, avg=10.17, stdev= 8.71, samples=18
+   iops        : min=    1, max=   57, avg=14.06, stdev=15.11, samples=18
+   iops        : min=    1, max=   31, avg= 9.67, stdev= 9.66, samples=21
+   iops        : min=    1, max=   32, avg=12.00, stdev=10.23, samples=18
+   iops        : min=    1, max=   61, avg=14.62, stdev=14.87, samples=21
+   iops        : min=    1, max=   29, avg=10.62, stdev= 8.21, samples=26
+   iops        : min=    1, max=   31, avg= 9.21, stdev= 9.45, samples=24
+   iops        : min=    1, max=   57, avg=13.56, stdev=14.32, samples=16
+   iops        : min=    1, max=   50, avg=11.61, stdev=12.68, samples=23
+
+                [*] This took 1m25.282s, IOPS/process was about 1 (first occurrence), during which
+                    1669MiB of user data was stored (logicalused) at 19.5MiB/s, but compression/metadata/ZFS magic
+                    meant that 1669MiB was actually written to disk (used) at 19.5MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=26, BW=26.4MiB/s (27.7MB/s)(2107MiB/79814msec); 0 zone resets
+  WRITE: bw=26.4MiB/s (27.7MB/s), 26.4MiB/s-26.4MiB/s (27.7MB/s-27.7MB/s), io=2107MiB (2209MB), run=79814-79814msec
+   iops        : min=    8, max=  666, avg=34.95, stdev=58.82, samples=120
+
+                [*] This took 1m21.877s, IOPS/process was about 26 (first occurrence), during which
+                    2107MiB of user data was stored (logicalused) at 25.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 2107MiB was actually written to disk (used) at 25.7MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #9/14:	COMPlz4ENCaes-128-ccm	(lz4 / aes-128-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=306, BW=1227KiB/s (1257kB/s)(84.7MiB/70678msec); 0 zone resets
+  WRITE: bw=1227KiB/s (1257kB/s), 1227KiB/s-1227KiB/s (1257kB/s-1257kB/s), io=84.7MiB (88.8MB), run=70678-70678msec
+   iops        : min=    2, max=  736, avg=380.20, stdev=200.22, samples=114
+
+                [*] This took 1m12.640s, IOPS/process was about 306 (first occurrence), during which
+                    4078MiB of user data was stored (logicalused) at 56.1MiB/s, but compression/metadata/ZFS magic
+                    meant that 85MiB was actually written to disk (used) at 1.1MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=5, BW=336KiB/s (344kB/s)(24.1MiB/73258msec); 0 zone resets
+      1   write: IOPS=7, BW=461KiB/s (472kB/s)(33.0MiB/73265msec); 0 zone resets
+      1   write: IOPS=5, BW=376KiB/s (385kB/s)(26.9MiB/73263msec); 0 zone resets
+      1   write: IOPS=5, BW=363KiB/s (372kB/s)(26.0MiB/73277msec); 0 zone resets
+      1   write: IOPS=6, BW=419KiB/s (429kB/s)(30.0MiB/73275msec); 0 zone resets
+      1   write: IOPS=5, BW=352KiB/s (360kB/s)(25.2MiB/73266msec); 0 zone resets
+      1   write: IOPS=5, BW=377KiB/s (386kB/s)(27.0MiB/73275msec); 0 zone resets
+      1   write: IOPS=5, BW=364KiB/s (373kB/s)(26.1MiB/73271msec); 0 zone resets
+      1   write: IOPS=6, BW=421KiB/s (431kB/s)(30.1MiB/73260msec); 0 zone resets
+      1   write: IOPS=4, BW=278KiB/s (284kB/s)(19.9MiB/73267msec); 0 zone resets
+      1   write: IOPS=5, BW=363KiB/s (372kB/s)(26.0MiB/73259msec); 0 zone resets
+      1   write: IOPS=5, BW=359KiB/s (368kB/s)(25.7MiB/73251msec); 0 zone resets
+      1   write: IOPS=6, BW=399KiB/s (409kB/s)(28.6MiB/73265msec); 0 zone resets
+      1   write: IOPS=5, BW=346KiB/s (354kB/s)(24.8MiB/73265msec); 0 zone resets
+      1   write: IOPS=6, BW=434KiB/s (445kB/s)(31.1MiB/73259msec); 0 zone resets
+      1   write: IOPS=6, BW=419KiB/s (429kB/s)(30.0MiB/73271msec); 0 zone resets
+      1   WRITE: bw=6068KiB/s (6214kB/s), 278KiB/s-461KiB/s (284kB/s-472kB/s), io=434MiB (455MB), run=73251-73277msec
+   iops        : min=    1, max=   69, avg=15.89, stdev=16.45, samples=46
+   iops        : min=    1, max=  115, avg=18.69, stdev=24.38, samples=54
+   iops        : min=    1, max=   85, avg=19.55, stdev=20.73, samples=42
+   iops        : min=    1, max=   97, avg=16.33, stdev=19.21, samples=48
+   iops        : min=    1, max=  159, avg=21.70, stdev=27.59, samples=43
+   iops        : min=    1, max=   57, avg=13.75, stdev=13.99, samples=56
+   iops        : min=    1, max=   64, avg=18.17, stdev=17.35, samples=46
+   iops        : min=    1, max=  116, avg=19.68, stdev=21.32, samples=41
+   iops        : min=    1, max=  144, avg=19.25, stdev=27.68, samples=48
+   iops        : min=    1, max=   52, avg=14.14, stdev=14.06, samples=42
+   iops        : min=    2, max=  106, avg=17.50, stdev=18.07, samples=46
+   iops        : min=    1, max=   63, avg=17.42, stdev=18.82, samples=45
+   iops        : min=    2, max=   87, avg=18.96, stdev=20.02, samples=46
+   iops        : min=    1, max=   62, avg=18.90, stdev=16.38, samples=40
+   iops        : min=    1, max=  253, avg=20.96, stdev=37.76, samples=46
+   iops        : min=    1, max=  202, avg=18.06, stdev=29.22, samples=51
+
+                [*] This took 1m15.125s, IOPS/process was about 5 (first occurrence), during which
+                    3299MiB of user data was stored (logicalused) at 43.9MiB/s, but compression/metadata/ZFS magic
+                    meant that 434MiB was actually written to disk (used) at 5.7MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=39, BW=39.0MiB/s (41.9MB/s)(3403MiB/85153msec); 0 zone resets
+  WRITE: bw=39.0MiB/s (41.9MB/s), 39.0MiB/s-39.0MiB/s (41.9MB/s-41.9MB/s), io=3403MiB (3568MB), run=85153-85153msec
+   iops        : min=    2, max=  650, avg=58.39, stdev=64.73, samples=116
+
+                [*] This took 1m27.058s, IOPS/process was about 39 (first occurrence), during which
+                    3403MiB of user data was stored (logicalused) at 39.0MiB/s, but compression/metadata/ZFS magic
+                    meant that 3403MiB was actually written to disk (used) at 39.0MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #10/14:	COMPlz4ENCaes-192-ccm	(lz4 / aes-192-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=356, BW=1428KiB/s (1462kB/s)(89.1MiB/63884msec); 0 zone resets
+  WRITE: bw=1428KiB/s (1462kB/s), 1428KiB/s-1428KiB/s (1462kB/s-1462kB/s), io=89.1MiB (93.4MB), run=63884-63884msec
+   iops        : min=    2, max=  810, avg=399.55, stdev=189.56, samples=114
+
+                [*] This took 1m5.814s, IOPS/process was about 356 (first occurrence), during which
+                    4084MiB of user data was stored (logicalused) at 62.0MiB/s, but compression/metadata/ZFS magic
+                    meant that 87MiB was actually written to disk (used) at 1.3MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=4, BW=304KiB/s (311kB/s)(28.2MiB/94894msec); 0 zone resets
+      1   write: IOPS=5, BW=342KiB/s (350kB/s)(31.7MiB/94903msec); 0 zone resets
+      1   write: IOPS=5, BW=345KiB/s (354kB/s)(32.0MiB/94893msec); 0 zone resets
+      1   write: IOPS=4, BW=302KiB/s (309kB/s)(28.0MiB/94906msec); 0 zone resets
+      1   write: IOPS=4, BW=315KiB/s (323kB/s)(29.2MiB/94892msec); 0 zone resets
+      1   write: IOPS=4, BW=270KiB/s (277kB/s)(25.1MiB/94900msec); 0 zone resets
+      1   write: IOPS=4, BW=259KiB/s (265kB/s)(24.0MiB/94889msec); 0 zone resets
+      1   write: IOPS=4, BW=279KiB/s (285kB/s)(25.8MiB/94893msec); 0 zone resets
+      1   write: IOPS=4, BW=266KiB/s (272kB/s)(24.6MiB/94902msec); 0 zone resets
+      1   write: IOPS=4, BW=299KiB/s (307kB/s)(27.8MiB/94895msec); 0 zone resets
+      1   write: IOPS=5, BW=339KiB/s (347kB/s)(31.4MiB/94899msec); 0 zone resets
+      1   write: IOPS=5, BW=353KiB/s (362kB/s)(32.8MiB/94897msec); 0 zone resets
+      1   write: IOPS=6, BW=385KiB/s (394kB/s)(35.7MiB/94892msec); 0 zone resets
+      1   write: IOPS=4, BW=291KiB/s (298kB/s)(27.0MiB/94896msec); 0 zone resets
+      1   write: IOPS=4, BW=313KiB/s (320kB/s)(29.0MiB/94891msec); 0 zone resets
+      1   write: IOPS=4, BW=279KiB/s (286kB/s)(25.9MiB/94893msec); 0 zone resets
+      1   WRITE: bw=4942KiB/s (5061kB/s), 259KiB/s-385KiB/s (265kB/s-394kB/s), io=458MiB (480MB), run=94889-94906msec
+   iops        : min=    1, max=  160, avg=17.14, stdev=25.93, samples=50
+   iops        : min=    2, max=   67, avg=21.64, stdev=20.38, samples=45
+   iops        : min=    1, max=  228, avg=16.81, stdev=32.08, samples=58
+   iops        : min=    1, max=  124, avg=18.15, stdev=26.24, samples=48
+   iops        : min=    1, max=   89, avg=16.25, stdev=17.25, samples=55
+   iops        : min=    1, max=   96, avg=16.13, stdev=20.19, samples=48
+   iops        : min=    1, max=   63, avg=16.04, stdev=14.60, samples=46
+   iops        : min=    1, max=   89, avg=16.06, stdev=17.99, samples=49
+   iops        : min=    1, max=   58, avg=14.63, stdev=14.04, samples=51
+   iops        : min=    1, max=  122, avg=16.53, stdev=20.96, samples=51
+   iops        : min=    1, max=  126, avg=17.23, stdev=22.66, samples=56
+   iops        : min=    1, max=  128, avg=19.76, stdev=24.17, samples=51
+   iops        : min=    1, max=  100, avg=21.86, stdev=23.38, samples=50
+   iops        : min=    1, max=   94, avg=16.00, stdev=17.90, samples=52
+   iops        : min=    1, max=   83, avg=15.96, stdev=19.28, samples=56
+   iops        : min=    1, max=   72, avg=15.02, stdev=15.48, samples=52
+
+                [*] This took 1m36.764s, IOPS/process was about 4 (first occurrence), during which
+                    3376MiB of user data was stored (logicalused) at 34.8MiB/s, but compression/metadata/ZFS magic
+                    meant that 457MiB was actually written to disk (used) at 4.7MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=36, BW=36.4MiB/s (38.1MB/s)(2775MiB/76299msec); 0 zone resets
+  WRITE: bw=36.4MiB/s (38.1MB/s), 36.4MiB/s-36.4MiB/s (38.1MB/s-38.1MB/s), io=2775MiB (2910MB), run=76299-76299msec
+   iops        : min=    2, max=  540, avg=49.80, stdev=55.42, samples=111
+
+                [*] This took 1m18.291s, IOPS/process was about 36 (first occurrence), during which
+                    2775MiB of user data was stored (logicalused) at 35.4MiB/s, but compression/metadata/ZFS magic
+                    meant that 2775MiB was actually written to disk (used) at 35.4MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #11/14:	COMPlz4ENCaes-256-ccm	(lz4 / aes-256-ccm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=345, BW=1382KiB/s (1415kB/s)(81.5MiB/60387msec); 0 zone resets
+  WRITE: bw=1382KiB/s (1415kB/s), 1382KiB/s-1382KiB/s (1415kB/s-1415kB/s), io=81.5MiB (85.5MB), run=60387-60387msec
+   iops        : min=    2, max=  720, avg=374.47, stdev=187.65, samples=110
+
+                [*] This took 1m2.427s, IOPS/process was about 345 (first occurrence), during which
+                    4074MiB of user data was stored (logicalused) at 65.2MiB/s, but compression/metadata/ZFS magic
+                    meant that 83MiB was actually written to disk (used) at 1.3MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=10, BW=650KiB/s (665kB/s)(42.1MiB/66282msec); 0 zone resets
+      1   write: IOPS=8, BW=543KiB/s (556kB/s)(35.1MiB/66297msec); 0 zone resets
+      1   write: IOPS=10, BW=640KiB/s (655kB/s)(41.4MiB/66292msec); 0 zone resets
+      1   write: IOPS=9, BW=631KiB/s (646kB/s)(40.8MiB/66282msec); 0 zone resets
+      1   write: IOPS=11, BW=709KiB/s (726kB/s)(45.9MiB/66280msec); 0 zone resets
+      1   write: IOPS=9, BW=605KiB/s (620kB/s)(39.2MiB/66283msec); 0 zone resets
+      1   write: IOPS=10, BW=643KiB/s (658kB/s)(41.6MiB/66283msec); 0 zone resets
+      1   write: IOPS=9, BW=630KiB/s (645kB/s)(40.8MiB/66281msec); 0 zone resets
+      1   write: IOPS=10, BW=647KiB/s (662kB/s)(41.9MiB/66299msec); 0 zone resets
+      1   write: IOPS=11, BW=760KiB/s (778kB/s)(49.2MiB/66280msec); 0 zone resets
+      1   write: IOPS=9, BW=617KiB/s (632kB/s)(39.9MiB/66281msec); 0 zone resets
+      1   write: IOPS=9, BW=624KiB/s (639kB/s)(40.4MiB/66287msec); 0 zone resets
+      1   write: IOPS=10, BW=676KiB/s (692kB/s)(43.8MiB/66285msec); 0 zone resets
+      1   write: IOPS=9, BW=596KiB/s (610kB/s)(38.6MiB/66292msec); 0 zone resets
+      1   write: IOPS=9, BW=599KiB/s (613kB/s)(38.8MiB/66288msec); 0 zone resets
+      1   write: IOPS=9, BW=579KiB/s (593kB/s)(37.5MiB/66289msec); 0 zone resets
+      1   WRITE: bw=9.91MiB/s (10.4MB/s), 543KiB/s-760KiB/s (556kB/s-778kB/s), io=657MiB (689MB), run=66280-66299msec
+   iops        : min=    1, max=   79, avg=20.98, stdev=19.48, samples=62
+   iops        : min=    1, max=   58, avg=15.75, stdev=12.46, samples=68
+   iops        : min=    1, max=   97, avg=18.30, stdev=17.91, samples=69
+   iops        : min=    1, max=   94, avg=16.53, stdev=17.02, samples=75
+   iops        : min=    1, max=  131, avg=19.75, stdev=26.31, samples=71
+   iops        : min=    1, max=   81, avg=19.24, stdev=16.75, samples=62
+   iops        : min=    1, max=  130, avg=18.21, stdev=21.31, samples=70
+   iops        : min=    1, max=  128, avg=18.35, stdev=20.61, samples=68
+   iops        : min=    1, max=   76, avg=18.56, stdev=16.85, samples=70
+   iops        : min=    1, max=   98, avg=21.35, stdev=20.89, samples=71
+   iops        : min=    1, max=   64, avg=17.14, stdev=15.61, samples=71
+   iops        : min=    1, max=   72, avg=17.78, stdev=15.83, samples=69
+   iops        : min=    1, max=  102, avg=19.21, stdev=18.60, samples=70
+   iops        : min=    1, max=  114, avg=16.44, stdev=18.83, samples=71
+   iops        : min=    1, max=   64, avg=18.42, stdev=16.17, samples=65
+   iops        : min=    1, max=   78, avg=16.31, stdev=15.22, samples=70
+
+                [*] This took 1m8.244s, IOPS/process was about 10 (first occurrence), during which
+                    3779MiB of user data was stored (logicalused) at 55.3MiB/s, but compression/metadata/ZFS magic
+                    meant that 646MiB was actually written to disk (used) at 9.4MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=49, BW=49.7MiB/s (52.1MB/s)(3493MiB/70239msec); 0 zone resets
+  WRITE: bw=49.7MiB/s (52.1MB/s), 49.7MiB/s-49.7MiB/s (52.1MB/s-52.1MB/s), io=3493MiB (3663MB), run=70239-70239msec
+   iops        : min=    1, max=  570, avg=58.95, stdev=51.53, samples=118
+
+                [*] This took 1m12.123s, IOPS/process was about 49 (first occurrence), during which
+                    3493MiB of user data was stored (logicalused) at 48.4MiB/s, but compression/metadata/ZFS magic
+                    meant that 3493MiB was actually written to disk (used) at 48.4MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #12/14:	COMPlz4ENCaes-128-gcm	(lz4 / aes-128-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=352, BW=1408KiB/s (1442kB/s)(83.9MiB/61027msec); 0 zone resets
+  WRITE: bw=1408KiB/s (1442kB/s), 1408KiB/s-1408KiB/s (1442kB/s-1442kB/s), io=83.9MiB (87.0MB), run=61027-61027msec
+   iops        : min=    8, max=  718, avg=367.53, stdev=99.46, samples=116
+
+                [*] This took 1m2.931s, IOPS/process was about 352 (first occurrence), during which
+                    4078MiB of user data was stored (logicalused) at 64.8MiB/s, but compression/metadata/ZFS magic
+                    meant that 84MiB was actually written to disk (used) at 1.3MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=7, BW=500KiB/s (512kB/s)(34.0MiB/69651msec); 0 zone resets
+      1   write: IOPS=7, BW=473KiB/s (485kB/s)(32.2MiB/69634msec); 0 zone resets
+      1   write: IOPS=9, BW=576KiB/s (590kB/s)(39.2MiB/69640msec); 0 zone resets
+      1   write: IOPS=8, BW=573KiB/s (587kB/s)(39.0MiB/69644msec); 0 zone resets
+      1   write: IOPS=7, BW=464KiB/s (475kB/s)(31.6MiB/69630msec); 0 zone resets
+      1   write: IOPS=6, BW=427KiB/s (438kB/s)(29.1MiB/69638msec); 0 zone resets
+      1   write: IOPS=6, BW=429KiB/s (440kB/s)(29.2MiB/69635msec); 0 zone resets
+      1   write: IOPS=6, BW=444KiB/s (455kB/s)(30.2MiB/69631msec); 0 zone resets
+      1   write: IOPS=7, BW=484KiB/s (496kB/s)(32.9MiB/69635msec); 0 zone resets
+      1   write: IOPS=7, BW=485KiB/s (497kB/s)(33.0MiB/69633msec); 0 zone resets
+      1   write: IOPS=7, BW=458KiB/s (469kB/s)(31.1MiB/69641msec); 0 zone resets
+      1   write: IOPS=7, BW=484KiB/s (496kB/s)(32.9MiB/69633msec); 0 zone resets
+      1   write: IOPS=7, BW=500KiB/s (512kB/s)(34.0MiB/69635msec); 0 zone resets
+      1   write: IOPS=7, BW=466KiB/s (477kB/s)(31.7MiB/69630msec); 0 zone resets
+      1   write: IOPS=7, BW=502KiB/s (514kB/s)(34.1MiB/69633msec); 0 zone resets
+      1   write: IOPS=7, BW=510KiB/s (522kB/s)(34.7MiB/69640msec); 0 zone resets
+      1   WRITE: bw=7775KiB/s (7962kB/s), 427KiB/s-576KiB/s (438kB/s-590kB/s), io=529MiB (555MB), run=69630-69651msec
+   iops        : min=    1, max=   64, avg=16.46, stdev=15.96, samples=63
+   iops        : min=    1, max=   64, avg=13.07, stdev=11.09, samples=74
+   iops        : min=    1, max=   96, avg=14.74, stdev=16.01, samples=80
+   iops        : min=    1, max=   95, avg=17.97, stdev=17.82, samples=66
+   iops        : min=    1, max=   64, avg=15.77, stdev=12.76, samples=60
+   iops        : min=    1, max=   58, avg=12.94, stdev=12.44, samples=67
+   iops        : min=    1, max=   59, avg=12.61, stdev=12.12, samples=70
+   iops        : min=    1, max=   56, avg=13.62, stdev=11.72, samples=66
+   iops        : min=    1, max=   58, avg=15.78, stdev=13.60, samples=63
+   iops        : min=    1, max=   56, avg=14.13, stdev=14.68, samples=71
+   iops        : min=    1, max=   53, avg=14.20, stdev=12.19, samples=66
+   iops        : min=    1, max=   62, avg=13.45, stdev=12.71, samples=73
+   iops        : min=    1, max=   64, avg=16.73, stdev=14.83, samples=62
+   iops        : min=    1, max=   58, avg=15.61, stdev=12.59, samples=61
+   iops        : min=    1, max=   64, avg=14.83, stdev=11.34, samples=70
+   iops        : min=    1, max=   58, avg=14.58, stdev=10.33, samples=71
+
+                [*] This took 1m11.499s, IOPS/process was about 7 (first occurrence), during which
+                    3567MiB of user data was stored (logicalused) at 49.8MiB/s, but compression/metadata/ZFS magic
+                    meant that 524MiB was actually written to disk (used) at 7.3MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=26, BW=26.4MiB/s (27.7MB/s)(1922MiB/72698msec); 0 zone resets
+  WRITE: bw=26.4MiB/s (27.7MB/s), 26.4MiB/s-26.4MiB/s (27.7MB/s-27.7MB/s), io=1922MiB (2015MB), run=72698-72698msec
+   iops        : min=    2, max=  572, avg=32.34, stdev=52.77, samples=118
+
+                [*] This took 1m14.612s, IOPS/process was about 26 (first occurrence), during which
+                    1922MiB of user data was stored (logicalused) at 25.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 1922MiB was actually written to disk (used) at 25.7MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #13/14:	COMPlz4ENCaes-192-gcm	(lz4 / aes-192-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=217, BW=870KiB/s (891kB/s)(55.1MiB/64790msec); 0 zone resets
+  WRITE: bw=870KiB/s (891kB/s), 870KiB/s-870KiB/s (891kB/s-891kB/s), io=55.1MiB (57.7MB), run=64790-64790msec
+   iops        : min=    1, max=  736, avg=255.89, stdev=199.12, samples=110
+
+                [*] This took 1m6.724s, IOPS/process was about 217 (first occurrence), during which
+                    3989MiB of user data was stored (logicalused) at 59.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 65MiB was actually written to disk (used) at .9MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=7, BW=497KiB/s (509kB/s)(32.8MiB/67636msec); 0 zone resets
+      1   write: IOPS=7, BW=480KiB/s (491kB/s)(31.7MiB/67657msec); 0 zone resets
+      1   write: IOPS=6, BW=440KiB/s (451kB/s)(29.1MiB/67634msec); 0 zone resets
+      1   write: IOPS=8, BW=516KiB/s (528kB/s)(34.1MiB/67638msec); 0 zone resets
+      1   write: IOPS=8, BW=543KiB/s (556kB/s)(35.9MiB/67633msec); 0 zone resets
+      1   write: IOPS=8, BW=560KiB/s (574kB/s)(37.0MiB/67633msec); 0 zone resets
+      1   write: IOPS=8, BW=514KiB/s (526kB/s)(33.9MiB/67646msec); 0 zone resets
+      1   write: IOPS=8, BW=530KiB/s (543kB/s)(35.0MiB/67633msec); 0 zone resets
+      1   write: IOPS=8, BW=516KiB/s (528kB/s)(34.1MiB/67650msec); 0 zone resets
+      1   write: IOPS=7, BW=501KiB/s (513kB/s)(33.1MiB/67635msec); 0 zone resets
+      1   write: IOPS=8, BW=559KiB/s (573kB/s)(36.9MiB/67635msec); 0 zone resets
+      1   write: IOPS=8, BW=529KiB/s (542kB/s)(34.9MiB/67633msec); 0 zone resets
+      1   write: IOPS=8, BW=563KiB/s (576kB/s)(37.2MiB/67645msec); 0 zone resets
+      1   write: IOPS=7, BW=500KiB/s (512kB/s)(33.0MiB/67632msec); 0 zone resets
+      1   write: IOPS=7, BW=473KiB/s (484kB/s)(31.2MiB/67637msec); 0 zone resets
+      1   write: IOPS=8, BW=517KiB/s (529kB/s)(34.1MiB/67642msec); 0 zone resets
+      1   WRITE: bw=8234KiB/s (8431kB/s), 440KiB/s-563KiB/s (451kB/s-576kB/s), io=544MiB (570MB), run=67632-67657msec
+   iops        : min=    1, max=   74, avg=14.60, stdev=14.31, samples=68
+   iops        : min=    1, max=   64, avg=12.38, stdev=13.13, samples=76
+   iops        : min=    1, max=   62, avg=13.07, stdev=12.70, samples=67
+   iops        : min=    1, max=   60, avg=15.00, stdev=13.31, samples=69
+   iops        : min=    1, max=   54, avg=12.54, stdev=11.03, samples=85
+   iops        : min=    1, max=   95, avg=15.26, stdev=15.62, samples=73
+   iops        : min=    1, max=   50, avg=13.65, stdev=11.67, samples=74
+   iops        : min=    1, max=   64, avg=16.00, stdev=14.66, samples=67
+   iops        : min=    1, max=   64, avg=13.93, stdev=14.29, samples=74
+   iops        : min=    1, max=   63, avg=13.08, stdev=11.34, samples=75
+   iops        : min=    1, max=  108, avg=14.36, stdev=16.35, samples=77
+   iops        : min=    1, max=   92, avg=15.56, stdev=16.44, samples=68
+   iops        : min=    1, max=   67, avg=14.15, stdev=14.13, samples=79
+   iops        : min=    1, max=   72, avg=15.45, stdev=14.74, samples=65
+   iops        : min=    1, max=   51, avg=12.70, stdev=10.63, samples=74
+   iops        : min=    1, max=   62, avg=14.14, stdev=13.18, samples=73
+
+                [*] This took 1m9.518s, IOPS/process was about 7 (first occurrence), during which
+                    3605MiB of user data was stored (logicalused) at 51.8MiB/s, but compression/metadata/ZFS magic
+                    meant that 539MiB was actually written to disk (used) at 7.7MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=24, BW=24.8MiB/s (26.0MB/s)(1997MiB/80415msec); 0 zone resets
+  WRITE: bw=24.8MiB/s (26.0MB/s), 24.8MiB/s-24.8MiB/s (26.0MB/s-26.0MB/s), io=1997MiB (2094MB), run=80415-80415msec
+   iops        : min=    2, max=  662, avg=33.52, stdev=59.27, samples=118
+
+                [*] This took 1m22.344s, IOPS/process was about 24 (first occurrence), during which
+                    1997MiB of user data was stored (logicalused) at 24.2MiB/s, but compression/metadata/ZFS magic
+                    meant that 1997MiB was actually written to disk (used) at 24.2MiB/s.
+
+
+
+
+***********************
+ [*] Starting test case #14/14:	COMPlz4ENCaes-256-gcm	(lz4 / aes-256-gcm)
+
+
+        [*] Starting subtest 1: Single 4 KiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 4096MiB)
+  write: IOPS=362, BW=1452KiB/s (1486kB/s)(86.4MiB/60974msec); 0 zone resets
+  WRITE: bw=1452KiB/s (1486kB/s), 1452KiB/s-1452KiB/s (1486kB/s-1486kB/s), io=86.4MiB (90.6MB), run=60974-60974msec
+   iops        : min=   54, max=  782, avg=372.42, stdev=101.05, samples=118
+
+                [*] This took 1m2.888s, IOPS/process was about 362 (first occurrence), during which
+                    4082MiB of user data was stored (logicalused) at 64.9MiB/s, but compression/metadata/ZFS magic
+                    meant that 86MiB was actually written to disk (used) at 1.3MiB/s.
+
+
+
+        [*] Starting subtest 2: 16 parallel 64 KiB random write processes
+
+                [*] The most relevant parts of the fio output (first part via uniq -c, prefixed by counts):
+     16 random-write: Laying out IO file (1 file / 256MiB)
+      1   write: IOPS=8, BW=574KiB/s (588kB/s)(38.8MiB/69209msec); 0 zone resets
+      1   write: IOPS=8, BW=563KiB/s (577kB/s)(38.1MiB/69209msec); 0 zone resets
+      1   write: IOPS=7, BW=491KiB/s (503kB/s)(33.2MiB/69204msec); 0 zone resets
+      1   write: IOPS=8, BW=526KiB/s (539kB/s)(35.6MiB/69217msec); 0 zone resets
+      1   write: IOPS=8, BW=520KiB/s (532kB/s)(35.1MiB/69209msec); 0 zone resets
+      1   write: IOPS=7, BW=475KiB/s (487kB/s)(32.1MiB/69208msec); 0 zone resets
+      1   write: IOPS=9, BW=595KiB/s (609kB/s)(40.2MiB/69194msec); 0 zone resets
+      1   write: IOPS=8, BW=543KiB/s (556kB/s)(36.7MiB/69200msec); 0 zone resets
+      1   write: IOPS=9, BW=581KiB/s (595kB/s)(39.2MiB/69199msec); 0 zone resets
+      1   write: IOPS=7, BW=503KiB/s (515kB/s)(34.0MiB/69186msec); 0 zone resets
+      1   write: IOPS=9, BW=590KiB/s (604kB/s)(39.9MiB/69182msec); 0 zone resets
+      1   write: IOPS=8, BW=562KiB/s (576kB/s)(38.0MiB/69177msec); 0 zone resets
+      1   write: IOPS=8, BW=556KiB/s (569kB/s)(37.6MiB/69180msec); 0 zone resets
+      1   write: IOPS=7, BW=477KiB/s (489kB/s)(32.2MiB/69181msec); 0 zone resets
+      1   write: IOPS=8, BW=546KiB/s (559kB/s)(36.9MiB/69151msec); 0 zone resets
+      1   write: IOPS=8, BW=517KiB/s (530kB/s)(34.9MiB/69146msec); 0 zone resets
+      1   WRITE: bw=8618KiB/s (8824kB/s), 475KiB/s-595KiB/s (487kB/s-609kB/s), io=583MiB (611MB), run=69146-69217msec
+   iops        : min=    1, max=   93, avg=15.68, stdev=14.48, samples=74
+   iops        : min=    1, max=   64, avg=15.90, stdev=14.56, samples=71
+   iops        : min=    1, max=   49, avg=12.88, stdev=10.53, samples=76
+   iops        : min=    1, max=   63, avg=14.30, stdev=11.43, samples=74
+   iops        : min=    1, max=   90, avg=13.49, stdev=14.54, samples=78
+   iops        : min=    1, max=   80, avg=12.95, stdev=12.01, samples=74
+   iops        : min=    1, max=   90, avg=14.51, stdev=17.03, samples=83
+   iops        : min=    1, max=   66, avg=13.20, stdev=11.83, samples=83
+   iops        : min=    1, max=  114, avg=15.19, stdev=16.01, samples=78
+   iops        : min=    1, max=   96, avg=14.39, stdev=14.06, samples=71
+   iops        : min=    1, max=   64, avg=14.06, stdev=12.84, samples=85
+   iops        : min=    1, max=   96, avg=16.24, stdev=16.92, samples=70
+   iops        : min=    1, max=   65, avg=15.09, stdev=12.52, samples=74
+   iops        : min=    1, max=   58, avg=12.63, stdev= 9.59, samples=75
+   iops        : min=    1, max=   41, avg=13.70, stdev= 9.95, samples=80
+   iops        : min=    1, max=   63, avg=14.43, stdev=12.89, samples=72
+
+                [*] This took 1m11.089s, IOPS/process was about 8 (first occurrence), during which
+                    3670MiB of user data was stored (logicalused) at 51.6MiB/s, but compression/metadata/ZFS magic
+                    meant that 576MiB was actually written to disk (used) at 8.1MiB/s.
+
+
+
+        [*] Starting subtest 3: Single 1 MiB random write process
+
+                [*] The most relevant parts of the fio output:
+random-write: Laying out IO file (1 file / 16384MiB)
+  write: IOPS=18, BW=18.1MiB/s (19.0MB/s)(1469MiB/80984msec); 0 zone resets
+  WRITE: bw=18.1MiB/s (19.0MB/s), 18.1MiB/s-18.1MiB/s (19.0MB/s-19.0MB/s), io=1469MiB (1540MB), run=80984-80984msec
+   iops        : min=    1, max=  630, avg=27.34, stdev=61.21, samples=107
+
+                [*] This took 1m22.799s, IOPS/process was about 18 (first occurrence), during which
+                    1469MiB of user data was stored (logicalused) at 17.7MiB/s, but compression/metadata/ZFS magic
+                    meant that 1469MiB was actually written to disk (used) at 17.7MiB/s.
+
+
+Destroying all test case datasets, but not their parent dataset
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCoff-000-xxx@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCoff-000-xxx@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCoff-000-xxx@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCoff-000-xxx@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCoff-000-xxx
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCoff-000-xxx@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCoff-000-xxx@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCoff-000-xxx@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCoff-000-xxx@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCoff-000-xxx
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-128-gcm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-192-gcm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPoffENCaes-256-gcm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-ccm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-ccm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-ccm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-ccm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-ccm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-128-gcm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-192-gcm
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-gcm@Subtest3
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-gcm@Subtest1
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-gcm@BeforeTest
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-gcm@Subtest2
+will destroy backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M/COMPlz4ENCaes-256-gcm
+
+
+Results summary:
+****************
+  Test case	Test case name          Compr/Encr settings 	 Subtest 1	 Subtest 2	 Subtest 3
+  ---------	--------------          ------------------- 	 ---------	 ---------	 ---------
+  TC #1/14:	COMPoffENCoff-000-xxx   off / off        	 1m2.355s	 1m14.606s	 1m11.246s
+                                          -Logical data size: 	  2831MiB  	  2747MiB  	  5249MiB
+                                          -Actual data size:  	  2831MiB  	  2747MiB  	  5249MiB
+                                          -Acc. logical data: 	  2831MiB  	  5578MiB  	  10827MiB
+                                          -Acc. actual data:  	  2831MiB  	  5578MiB  	  10828MiB
+                                          -IOPS/process:      	  81        	  4        	  75      
+                                          -Logical throughput:	  45.4MiB/s  	  36.8MiB/s  	  73.6MiB/s
+                                          -Actual throughput: 	  45.4MiB/s  	  36.8MiB/s  	  73.6MiB/s
+  TC #2/14:	COMPlz4ENCoff-000-xxx   lz4 / off        	 1m2.402s	 1m7.510s	 1m23.112s
+                                          -Logical data size: 	  4068MiB  	  3642MiB  	  1207MiB
+                                          -Actual data size:  	  80MiB  	  558MiB  	  1207MiB
+                                          -Acc. logical data: 	  4068MiB  	  7710MiB  	  8917MiB
+                                          -Acc. actual data:  	  80MiB  	  638MiB  	  1845MiB
+                                          -IOPS/process:      	  328        	  7        	  14      
+                                          -Logical throughput:	  65.1MiB/s  	  53.9MiB/s  	  14.5MiB/s
+                                          -Actual throughput: 	  1.2MiB/s  	  8.2MiB/s  	  14.5MiB/s
+  TC #3/14:	COMPoffENCaes-128-ccm   off / aes-128-ccm	 1m2.362s	 1m17.996s	 1m34.484s
+                                          -Logical data size: 	  1704MiB  	  1808MiB  	  4608MiB
+                                          -Actual data size:  	  1704MiB  	  1808MiB  	  4608MiB
+                                          -Acc. logical data: 	  1704MiB  	  3512MiB  	  8120MiB
+                                          -Acc. actual data:  	  1704MiB  	  3513MiB  	  8121MiB
+                                          -IOPS/process:      	  36        	  1        	  49      
+                                          -Logical throughput:	  27.3MiB/s  	  23.1MiB/s  	  48.7MiB/s
+                                          -Actual throughput: 	  27.3MiB/s  	  23.1MiB/s  	  48.7MiB/s
+  TC #4/14:	COMPoffENCaes-192-ccm   off / aes-192-ccm	 1m3.786s	 1m40.549s	 1m13.862s
+                                          -Logical data size: 	  1156MiB  	  1627MiB  	  3152MiB
+                                          -Actual data size:  	  1156MiB  	  1627MiB  	  3152MiB
+                                          -Acc. logical data: 	  1156MiB  	  2783MiB  	  5935MiB
+                                          -Acc. actual data:  	  1156MiB  	  2783MiB  	  5936MiB
+                                          -IOPS/process:      	  22        	  1        	  43      
+                                          -Logical throughput:	  18.1MiB/s  	  16.1MiB/s  	  42.6MiB/s
+                                          -Actual throughput: 	  18.1MiB/s  	  16.1MiB/s  	  42.6MiB/s
+  TC #5/14:	COMPoffENCaes-256-ccm   off / aes-256-ccm	 1m2.410s	 1m23.229s	 1m34.075s
+                                          -Logical data size: 	  1717MiB  	  2124MiB  	  3389MiB
+                                          -Actual data size:  	  1717MiB  	  2124MiB  	  3389MiB
+                                          -Acc. logical data: 	  1717MiB  	  3841MiB  	  7230MiB
+                                          -Acc. actual data:  	  1717MiB  	  3842MiB  	  7231MiB
+                                          -IOPS/process:      	  37        	  2        	  36      
+                                          -Logical throughput:	  27.5MiB/s  	  25.5MiB/s  	  36.0MiB/s
+                                          -Actual throughput: 	  27.5MiB/s  	  25.5MiB/s  	  36.0MiB/s
+  TC #6/14:	COMPoffENCaes-128-gcm   off / aes-128-gcm	 1m5.774s	 1m18.216s	 1m14.902s
+                                          -Logical data size: 	  1364MiB  	  1638MiB  	  2192MiB
+                                          -Actual data size:  	  1364MiB  	  1638MiB  	  2192MiB
+                                          -Acc. logical data: 	  1364MiB  	  3002MiB  	  5194MiB
+                                          -Acc. actual data:  	  1364MiB  	  3002MiB  	  5195MiB
+                                          -IOPS/process:      	  26        	  1        	  30      
+                                          -Logical throughput:	  20.7MiB/s  	  20.9MiB/s  	  29.2MiB/s
+                                          -Actual throughput: 	  20.7MiB/s  	  20.9MiB/s  	  29.2MiB/s
+  TC #7/14:	COMPoffENCaes-192-gcm   off / aes-192-gcm	 1m2.700s	 1m20.183s	 1m23.559s
+                                          -Logical data size: 	  1259MiB  	  1641MiB  	  2125MiB
+                                          -Actual data size:  	  1259MiB  	  1641MiB  	  2125MiB
+                                          -Acc. logical data: 	  1259MiB  	  2900MiB  	  5025MiB
+                                          -Acc. actual data:  	  1259MiB  	  2901MiB  	  5026MiB
+                                          -IOPS/process:      	  24        	  1        	  26      
+                                          -Logical throughput:	  20.0MiB/s  	  20.4MiB/s  	  25.4MiB/s
+                                          -Actual throughput: 	  20.0MiB/s  	  20.4MiB/s  	  25.4MiB/s
+  TC #8/14:	COMPoffENCaes-256-gcm   off / aes-256-gcm	 1m3.547s	 1m25.282s	 1m21.877s
+                                          -Logical data size: 	  1308MiB  	  1669MiB  	  2107MiB
+                                          -Actual data size:  	  1308MiB  	  1669MiB  	  2107MiB
+                                          -Acc. logical data: 	  1308MiB  	  2977MiB  	  5084MiB
+                                          -Acc. actual data:  	  1308MiB  	  2978MiB  	  5085MiB
+                                          -IOPS/process:      	  25        	  1        	  26      
+                                          -Logical throughput:	  20.5MiB/s  	  19.5MiB/s  	  25.7MiB/s
+                                          -Actual throughput: 	  20.5MiB/s  	  19.5MiB/s  	  25.7MiB/s
+  TC #9/14:	COMPlz4ENCaes-128-ccm   lz4 / aes-128-ccm	 1m12.640s	 1m15.125s	 1m27.058s
+                                          -Logical data size: 	  4078MiB  	  3299MiB  	  3403MiB
+                                          -Actual data size:  	  85MiB  	  434MiB  	  3403MiB
+                                          -Acc. logical data: 	  4078MiB  	  7377MiB  	  10781MiB
+                                          -Acc. actual data:  	  85MiB  	  519MiB  	  3923MiB
+                                          -IOPS/process:      	  306        	  5        	  39      
+                                          -Logical throughput:	  56.1MiB/s  	  43.9MiB/s  	  39.0MiB/s
+                                          -Actual throughput: 	  1.1MiB/s  	  5.7MiB/s  	  39.0MiB/s
+  TC #10/14:	COMPlz4ENCaes-192-ccm   lz4 / aes-192-ccm	 1m5.814s	 1m36.764s	 1m18.291s
+                                          -Logical data size: 	  4084MiB  	  3376MiB  	  2775MiB
+                                          -Actual data size:  	  87MiB  	  457MiB  	  2775MiB
+                                          -Acc. logical data: 	  4084MiB  	  7460MiB  	  10236MiB
+                                          -Acc. actual data:  	  87MiB  	  545MiB  	  3320MiB
+                                          -IOPS/process:      	  356        	  4        	  36      
+                                          -Logical throughput:	  62.0MiB/s  	  34.8MiB/s  	  35.4MiB/s
+                                          -Actual throughput: 	  1.3MiB/s  	  4.7MiB/s  	  35.4MiB/s
+  TC #11/14:	COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m2.427s	 1m8.244s	 1m12.123s
+                                          -Logical data size: 	  4074MiB  	  3779MiB  	  3493MiB
+                                          -Actual data size:  	  83MiB  	  646MiB  	  3493MiB
+                                          -Acc. logical data: 	  4074MiB  	  7853MiB  	  11347MiB
+                                          -Acc. actual data:  	  83MiB  	  729MiB  	  4223MiB
+                                          -IOPS/process:      	  345        	  10        	  49      
+                                          -Logical throughput:	  65.2MiB/s  	  55.3MiB/s  	  48.4MiB/s
+                                          -Actual throughput: 	  1.3MiB/s  	  9.4MiB/s  	  48.4MiB/s
+  TC #12/14:	COMPlz4ENCaes-128-gcm   lz4 / aes-128-gcm	 1m2.931s	 1m11.499s	 1m14.612s
+                                          -Logical data size: 	  4078MiB  	  3567MiB  	  1922MiB
+                                          -Actual data size:  	  84MiB  	  524MiB  	  1922MiB
+                                          -Acc. logical data: 	  4078MiB  	  7645MiB  	  9567MiB
+                                          -Acc. actual data:  	  84MiB  	  609MiB  	  2532MiB
+                                          -IOPS/process:      	  352        	  7        	  26      
+                                          -Logical throughput:	  64.8MiB/s  	  49.8MiB/s  	  25.7MiB/s
+                                          -Actual throughput: 	  1.3MiB/s  	  7.3MiB/s  	  25.7MiB/s
+  TC #13/14:	COMPlz4ENCaes-192-gcm   lz4 / aes-192-gcm	 1m6.724s	 1m9.518s	 1m22.344s
+                                          -Logical data size: 	  3989MiB  	  3605MiB  	  1997MiB
+                                          -Actual data size:  	  65MiB  	  539MiB  	  1997MiB
+                                          -Acc. logical data: 	  3989MiB  	  7594MiB  	  9591MiB
+                                          -Acc. actual data:  	  65MiB  	  604MiB  	  2601MiB
+                                          -IOPS/process:      	  217        	  7        	  24      
+                                          -Logical throughput:	  59.7MiB/s  	  51.8MiB/s  	  24.2MiB/s
+                                          -Actual throughput: 	  .9MiB/s  	  7.7MiB/s  	  24.2MiB/s
+  TC #14/14:	COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m2.888s	 1m11.089s	 1m22.799s
+                                          -Logical data size: 	  4082MiB  	  3670MiB  	  1469MiB
+                                          -Actual data size:  	  86MiB  	  576MiB  	  1469MiB
+                                          -Acc. logical data: 	  4082MiB  	  7752MiB  	  9221MiB
+                                          -Acc. actual data:  	  86MiB  	  662MiB  	  2131MiB
+                                          -IOPS/process:      	  362        	  8        	  18      
+                                          -Logical throughput:	  64.9MiB/s  	  51.6MiB/s  	  17.7MiB/s
+                                          -Actual throughput: 	  1.3MiB/s  	  8.1MiB/s  	  17.7MiB/s
+
+This test sequence, which started at 2020-05-24_091927, ended at 2020-05-24_101556.
+Logfiles are stored here: /backuppool/ZFSbenchmark/Test_2020-05-24_091927_recordsize_1M
+***********************************************

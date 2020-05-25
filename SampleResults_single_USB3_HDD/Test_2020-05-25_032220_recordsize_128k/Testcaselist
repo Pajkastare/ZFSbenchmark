@@ -1,0 +1,141 @@
+***********************************************
+./ZFSbenchmark_backuppool.sh, started at 2020-05-25_032220
+***********************************************
+
+List of test cases (>= 1 measurement per TC, each of which is >= 60 seconds):
+Test case #1:	COMPoffENCoff-000-xxx	(off / off)
+Test case #2:	COMPlz4ENCoff-000-xxx	(lz4 / off)
+Test case #3:	COMPoffENCaes-128-ccm	(off / aes-128-ccm)
+Test case #4:	COMPoffENCaes-192-ccm	(off / aes-192-ccm)
+Test case #5:	COMPoffENCaes-256-ccm	(off / aes-256-ccm)
+Test case #6:	COMPoffENCaes-128-gcm	(off / aes-128-gcm)
+Test case #7:	COMPoffENCaes-192-gcm	(off / aes-192-gcm)
+Test case #8:	COMPoffENCaes-256-gcm	(off / aes-256-gcm)
+Test case #9:	COMPlz4ENCaes-128-ccm	(lz4 / aes-128-ccm)
+Test case #10:	COMPlz4ENCaes-192-ccm	(lz4 / aes-192-ccm)
+Test case #11:	COMPlz4ENCaes-256-ccm	(lz4 / aes-256-ccm)
+Test case #12:	COMPlz4ENCaes-128-gcm	(lz4 / aes-128-gcm)
+Test case #13:	COMPlz4ENCaes-192-gcm	(lz4 / aes-192-gcm)
+Test case #14:	COMPlz4ENCaes-256-gcm	(lz4 / aes-256-gcm)
+
+
+Results summary:
+****************
+  Test case	Test case name          Compr/Encr settings 	 Subtest 1	 Subtest 2	 Subtest 3
+  ---------	--------------          ------------------- 	 ---------	 ---------	 ---------
+  TC #1/14:	COMPoffENCoff-000-xxx   off / off        	 1m1.919s	 1m12.297s	 1m11.463s
+                                          -Logical data size: 	  2427MiB  	  2752MiB  	  5324MiB
+                                          -Actual data size:  	  2428MiB  	  2753MiB  	  5326MiB
+                                          -Acc. logical data: 	  2427MiB  	  5179MiB  	  10503MiB
+                                          -Acc. actual data:  	  2428MiB  	  5181MiB  	  10507MiB
+                                          -IOPS/process:      	  487        	  30        	  76      
+                                          -Logical throughput:	  39.1MiB/s  	  38.0MiB/s  	  74.5MiB/s
+                                          -Actual throughput: 	  39.2MiB/s  	  38.0MiB/s  	  74.5MiB/s
+  TC #2/14:	COMPlz4ENCoff-000-xxx   lz4 / off        	 1m4.553s	 1m14.321s	 1m45.588s
+                                          -Logical data size: 	  4048MiB  	  2259MiB  	  4204MiB
+                                          -Actual data size:  	  289MiB  	  1470MiB  	  4206MiB
+                                          -Acc. logical data: 	  4048MiB  	  6308MiB  	  10512MiB
+                                          -Acc. actual data:  	  289MiB  	  1760MiB  	  5966MiB
+                                          -IOPS/process:      	  2311        	  19        	  40      
+                                          -Logical throughput:	  62.7MiB/s  	  30.3MiB/s  	  39.8MiB/s
+                                          -Actual throughput: 	  4.4MiB/s  	  19.7MiB/s  	  39.8MiB/s
+  TC #3/14:	COMPoffENCaes-128-ccm   off / aes-128-ccm	 1m1.933s	 1m10.390s	 1m10.712s
+                                          -Logical data size: 	  1932MiB  	  2591MiB  	  4193MiB
+                                          -Actual data size:  	  1933MiB  	  2593MiB  	  4195MiB
+                                          -Acc. logical data: 	  1932MiB  	  4523MiB  	  8717MiB
+                                          -Acc. actual data:  	  1933MiB  	  4526MiB  	  8722MiB
+                                          -IOPS/process:      	  347        	  24        	  60      
+                                          -Logical throughput:	  31.1MiB/s  	  36.8MiB/s  	  59.2MiB/s
+                                          -Actual throughput: 	  31.2MiB/s  	  36.8MiB/s  	  59.3MiB/s
+  TC #4/14:	COMPoffENCaes-192-ccm   off / aes-192-ccm	 1m7.534s	 1m28.613s	 3m20.936s
+                                          -Logical data size: 	  1764MiB  	  1798MiB  	  841MiB
+                                          -Actual data size:  	  1765MiB  	  1799MiB  	  842MiB
+                                          -Acc. logical data: 	  1764MiB  	  3563MiB  	  4405MiB
+                                          -Acc. actual data:  	  1765MiB  	  3565MiB  	  4408MiB
+                                          -IOPS/process:      	  281        	  12        	  4      
+                                          -Logical throughput:	  26.1MiB/s  	  20.2MiB/s  	  4.1MiB/s
+                                          -Actual throughput: 	  26.1MiB/s  	  20.3MiB/s  	  4.1MiB/s
+  TC #5/14:	COMPoffENCaes-256-ccm   off / aes-256-ccm	 1m1.947s	 1m8.919s	 1m11.098s
+                                          -Logical data size: 	  2007MiB  	  2116MiB  	  3511MiB
+                                          -Actual data size:  	  2008MiB  	  2117MiB  	  3513MiB
+                                          -Acc. logical data: 	  2007MiB  	  4124MiB  	  7636MiB
+                                          -Acc. actual data:  	  2008MiB  	  4126MiB  	  7640MiB
+                                          -IOPS/process:      	  367        	  18        	  50      
+                                          -Logical throughput:	  32.3MiB/s  	  30.7MiB/s  	  49.3MiB/s
+                                          -Actual throughput: 	  32.4MiB/s  	  30.7MiB/s  	  49.4MiB/s
+  TC #6/14:	COMPoffENCaes-128-gcm   off / aes-128-gcm	 1m3.749s	 1m17.192s	 1m12.223s
+                                          -Logical data size: 	  1515MiB  	  1791MiB  	  2036MiB
+                                          -Actual data size:  	  1516MiB  	  1792MiB  	  2037MiB
+                                          -Acc. logical data: 	  1515MiB  	  3306MiB  	  5343MiB
+                                          -Acc. actual data:  	  1516MiB  	  3308MiB  	  5346MiB
+                                          -IOPS/process:      	  244        	  16        	  28      
+                                          -Logical throughput:	  23.7MiB/s  	  23.2MiB/s  	  28.1MiB/s
+                                          -Actual throughput: 	  23.7MiB/s  	  23.2MiB/s  	  28.2MiB/s
+  TC #7/14:	COMPoffENCaes-192-gcm   off / aes-192-gcm	 1m9.109s	 1m22.047s	 1m18.017s
+                                          -Logical data size: 	  1489MiB  	  1649MiB  	  2125MiB
+                                          -Actual data size:  	  1490MiB  	  1650MiB  	  2126MiB
+                                          -Acc. logical data: 	  1489MiB  	  3139MiB  	  5264MiB
+                                          -Acc. actual data:  	  1490MiB  	  3141MiB  	  5267MiB
+                                          -IOPS/process:      	  220        	  11        	  27      
+                                          -Logical throughput:	  21.5MiB/s  	  20.0MiB/s  	  27.2MiB/s
+                                          -Actual throughput: 	  21.5MiB/s  	  20.1MiB/s  	  27.2MiB/s
+  TC #8/14:	COMPoffENCaes-256-gcm   off / aes-256-gcm	 1m4.062s	 1m14.417s	 1m16.399s
+                                          -Logical data size: 	  1518MiB  	  1736MiB  	  2080MiB
+                                          -Actual data size:  	  1519MiB  	  1737MiB  	  2081MiB
+                                          -Acc. logical data: 	  1518MiB  	  3254MiB  	  5334MiB
+                                          -Acc. actual data:  	  1519MiB  	  3256MiB  	  5338MiB
+                                          -IOPS/process:      	  243        	  14        	  27      
+                                          -Logical throughput:	  23.6MiB/s  	  23.3MiB/s  	  27.2MiB/s
+                                          -Actual throughput: 	  23.7MiB/s  	  23.3MiB/s  	  27.2MiB/s
+  TC #9/14:	COMPlz4ENCaes-128-ccm   lz4 / aes-128-ccm	 1m8.692s	 1m34.593s	 1m26.659s
+                                          -Logical data size: 	  3272MiB  	  1098MiB  	  2498MiB
+                                          -Actual data size:  	  223MiB  	  614MiB  	  2500MiB
+                                          -Acc. logical data: 	  3272MiB  	  4370MiB  	  6868MiB
+                                          -Acc. actual data:  	  223MiB  	  837MiB  	  3337MiB
+                                          -IOPS/process:      	  781        	  7        	  29      
+                                          -Logical throughput:	  47.6MiB/s  	  11.6MiB/s  	  28.8MiB/s
+                                          -Actual throughput: 	  3.2MiB/s  	  6.4MiB/s  	  28.8MiB/s
+  TC #10/14:	COMPlz4ENCaes-192-ccm   lz4 / aes-192-ccm	 1m24.661s	 1m10.970s	 1m42.458s
+                                          -Logical data size: 	  2163MiB  	  2545MiB  	  967MiB
+                                          -Actual data size:  	  143MiB  	  1738MiB  	  968MiB
+                                          -Acc. logical data: 	  2163MiB  	  4709MiB  	  5677MiB
+                                          -Acc. actual data:  	  143MiB  	  1882MiB  	  2850MiB
+                                          -IOPS/process:      	  296        	  24        	  9      
+                                          -Logical throughput:	  25.5MiB/s  	  35.8MiB/s  	  9.4MiB/s
+                                          -Actual throughput: 	  1.6MiB/s  	  24.4MiB/s  	  9.4MiB/s
+  TC #11/14:	COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m2.774s	 1m20.894s	 1m57.587s
+                                          -Logical data size: 	  3564MiB  	  1944MiB  	  876MiB
+                                          -Actual data size:  	  245MiB  	  1209MiB  	  877MiB
+                                          -Acc. logical data: 	  3564MiB  	  5508MiB  	  6385MiB
+                                          -Acc. actual data:  	  245MiB  	  1454MiB  	  2332MiB
+                                          -IOPS/process:      	  1092        	  14        	  7      
+                                          -Logical throughput:	  56.7MiB/s  	  24.0MiB/s  	  7.4MiB/s
+                                          -Actual throughput: 	  3.9MiB/s  	  14.9MiB/s  	  7.4MiB/s
+  TC #12/14:	COMPlz4ENCaes-128-gcm   lz4 / aes-128-gcm	 1m11.947s	 1m10.356s	 1m19.763s
+                                          -Logical data size: 	  1057MiB  	  2294MiB  	  2035MiB
+                                          -Actual data size:  	  68MiB  	  1501MiB  	  2036MiB
+                                          -Acc. logical data: 	  1057MiB  	  3352MiB  	  5387MiB
+                                          -Acc. actual data:  	  68MiB  	  1570MiB  	  3607MiB
+                                          -IOPS/process:      	  139        	  20        	  26      
+                                          -Logical throughput:	  14.6MiB/s  	  32.6MiB/s  	  25.5MiB/s
+                                          -Actual throughput: 	  .9MiB/s  	  21.3MiB/s  	  25.5MiB/s
+  TC #13/14:	COMPlz4ENCaes-192-gcm   lz4 / aes-192-gcm	 1m2.627s	 1m14.125s	 1m14.706s
+                                          -Logical data size: 	  3507MiB  	  2309MiB  	  1989MiB
+                                          -Actual data size:  	  241MiB  	  1514MiB  	  1990MiB
+                                          -Acc. logical data: 	  3507MiB  	  5816MiB  	  7805MiB
+                                          -Acc. actual data:  	  241MiB  	  1755MiB  	  3746MiB
+                                          -IOPS/process:      	  1039        	  24        	  27      
+                                          -Logical throughput:	  55.9MiB/s  	  31.1MiB/s  	  26.6MiB/s
+                                          -Actual throughput: 	  3.8MiB/s  	  20.4MiB/s  	  26.6MiB/s
+  TC #14/14:	COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m2.738s	 1m12.479s	 1m16.384s
+                                          -Logical data size: 	  3588MiB  	  2256MiB  	  1933MiB
+                                          -Actual data size:  	  247MiB  	  1468MiB  	  1934MiB
+                                          -Acc. logical data: 	  3588MiB  	  5845MiB  	  7779MiB
+                                          -Acc. actual data:  	  247MiB  	  1715MiB  	  3650MiB
+                                          -IOPS/process:      	  1116        	  20        	  25      
+                                          -Logical throughput:	  57.1MiB/s  	  31.1MiB/s  	  25.3MiB/s
+                                          -Actual throughput: 	  3.9MiB/s  	  20.2MiB/s  	  25.3MiB/s
+
+This test sequence, which started at 2020-05-25_032220, ended at 2020-05-25_042207.
+Logfiles are stored here: /backuppool/ZFSbenchmark/Test_2020-05-25_032220_recordsize_128k
+***********************************************
