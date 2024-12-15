@@ -1,0 +1,184 @@
+
+	COMPACT OUTPUT
+	**************
+	N.B.: Subtest 1 is 1 process/4 KiB, subtest 2 is 16 processes/64 KiB, and subtest 3 is 1 process/1 MiB
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	4k
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m1.293s	 1m5.715s	 1m6.074s
+		TC #1/4:	                                          -Logical data size: 	  4136MiB  	  4136MiB  	  16544MiB
+		TC #1/4:	                                          -Actual data size:  	  8272MiB  	  8273MiB  	  33088MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  156.8 MiB/s	  65.8 MiB/s	  540.3 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  156.8 MiB/s	  1054.3 MiB/s	  540.3 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  40148.0     	  1054.0     	  540.0
+		TC #1/4:	                                          -Fio IOPS (total):	  40148     	  16864     	  540
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.917s	 1m5.943s	 1m10.499s
+		TC #2/4:	                                          -Logical data size: 	  4143MiB  	  4136MiB  	  16544MiB
+		TC #2/4:	                                          -Actual data size:  	  8286MiB  	  8272MiB  	  33088MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  151.1 MiB/s	  55.3 MiB/s	  493.5 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  151.1 MiB/s	  884.9 MiB/s	  493.5 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  38690.0     	  884.5     	  493.0
+		TC #2/4:	                                          -Fio IOPS (total):	  38690     	  14153     	  493
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m29.083s	 1m13.330s	 1m11.511s
+		TC #3/4:	                                          -Logical data size: 	  4160MiB  	  4160MiB  	  16640MiB
+		TC #3/4:	                                          -Actual data size:  	  8320MiB  	  8320MiB  	  33280MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  89.0 MiB/s	  19.3 MiB/s	  282.0 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  89.0 MiB/s	  309.1 MiB/s	  282.0 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  22788.0     	  308.7     	  282.0
+		TC #3/4:	                                          -Fio IOPS (total):	  22788     	  4940     	  282
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m1.860s	 1m9.137s	 2m21.615s
+		TC #4/4:	                                          -Logical data size: 	  4160MiB  	  4160MiB  	  16640MiB
+		TC #4/4:	                                          -Actual data size:  	  8320MiB  	  8320MiB  	  33280MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  146.2 MiB/s	  39.7 MiB/s	  149.5 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  146.2 MiB/s	  636.3 MiB/s	  149.5 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  37447.0     	  635.7     	  149.0
+		TC #4/4:	                                          -Fio IOPS (total):	  37447     	  10172     	  149
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	16k
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m0.571s	 1m15.861s	 1m9.110s
+		TC #1/4:	                                          -Logical data size: 	  4108MiB  	  4108MiB  	  16432MiB
+		TC #1/4:	                                          -Actual data size:  	  4120MiB  	  4120MiB  	  16480MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  139.9 MiB/s	  93.1 MiB/s	  459.4 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  139.9 MiB/s	  1489.6 MiB/s	  459.4 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  35815.0     	  1489.1     	  459.0
+		TC #1/4:	                                          -Fio IOPS (total):	  35815     	  23826     	  459
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.652s	 1m2.468s	 1m0.838s
+		TC #2/4:	                                          -Logical data size: 	  7772MiB  	  4108MiB  	  16432MiB
+		TC #2/4:	                                          -Actual data size:  	  3979MiB  	  4120MiB  	  16480MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  120.4 MiB/s	  100.9 MiB/s	  1339.3 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  120.4 MiB/s	  1615.7 MiB/s	  1339.3 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  30830.0     	  1615.1     	  1339.0
+		TC #2/4:	                                          -Fio IOPS (total):	  30830     	  25842     	  1339
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m4.629s	 1m8.907s	 1m11.701s
+		TC #3/4:	                                          -Logical data size: 	  3780MiB  	  4112MiB  	  16448MiB
+		TC #3/4:	                                          -Actual data size:  	  1913MiB  	  4128MiB  	  16512MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  35.7 MiB/s	  23.9 MiB/s	  342.1 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  35.7 MiB/s	  383.8 MiB/s	  342.1 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  9157.0     	  383.4     	  342.0
+		TC #3/4:	                                          -Fio IOPS (total):	  9157     	  6135     	  342
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m0.670s	 1m1.896s	 1m4.008s
+		TC #4/4:	                                          -Logical data size: 	  4112MiB  	  4112MiB  	  16448MiB
+		TC #4/4:	                                          -Actual data size:  	  2080MiB  	  4128MiB  	  16512MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  111.0 MiB/s	  131.8 MiB/s	  1273.8 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  111.0 MiB/s	  2109.3 MiB/s	  1273.8 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  28431.0     	  2108.9     	  1273.0
+		TC #4/4:	                                          -Fio IOPS (total):	  28431     	  33743     	  1273
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	64k
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m0.469s	 1m12.997s	 1m5.171s
+		TC #1/4:	                                          -Logical data size: 	  4099MiB  	  4099MiB  	  16396MiB
+		TC #1/4:	                                          -Actual data size:  	  4102MiB  	  4102MiB  	  16408MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  120.1 MiB/s	  60.8 MiB/s	  950.6 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  120.1 MiB/s	  974.1 MiB/s	  950.6 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  30752.0     	  973.5     	  950.0
+		TC #1/4:	                                          -Fio IOPS (total):	  30752     	  15577     	  950
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.406s	 1m3.967s	 1m0.937s
+		TC #2/4:	                                          -Logical data size: 	  4099MiB  	  4099MiB  	  16396MiB
+		TC #2/4:	                                          -Actual data size:  	  1030MiB  	  4102MiB  	  16408MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  90.6 MiB/s	  157.4 MiB/s	  1419.7 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  90.6 MiB/s	  2518.6 MiB/s	  1419.7 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  23216.0     	  2518.0     	  1419.0
+		TC #2/4:	                                          -Fio IOPS (total):	  23216     	  40288     	  1419
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m1.553s	 1m15.132s	 1m11.526s
+		TC #3/4:	                                          -Logical data size: 	  4090MiB  	  4100MiB  	  16400MiB
+		TC #3/4:	                                          -Actual data size:  	  598MiB  	  4104MiB  	  16416MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  25.2 MiB/s	  23.0 MiB/s	  361.5 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  25.2 MiB/s	  368.4 MiB/s	  361.5 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  6473.0     	  368.0     	  361.0
+		TC #3/4:	                                          -Fio IOPS (total):	  6473     	  5889     	  361
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m0.512s	 1m2.750s	 1m3.520s
+		TC #4/4:	                                          -Logical data size: 	  4100MiB  	  4100MiB  	  16400MiB
+		TC #4/4:	                                          -Actual data size:  	  1032MiB  	  4104MiB  	  16416MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  79.1 MiB/s	  174.2 MiB/s	  2111.6 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  79.1 MiB/s	  2787.9 MiB/s	  2111.6 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  20274.0     	  2787.4     	  2111.0
+		TC #4/4:	                                          -Fio IOPS (total):	  20274     	  44599     	  2111
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	128k
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m1.624s	 1m7.800s	 1m4.984s
+		TC #1/4:	                                          -Logical data size: 	  4097MiB  	  4097MiB  	  16390MiB
+		TC #1/4:	                                          -Actual data size:  	  4099MiB  	  4099MiB  	  16396MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  70.0 MiB/s	  25.5 MiB/s	  1098.8 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  70.0 MiB/s	  408.1 MiB/s	  1098.8 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  17944.0     	  407.7     	  1098.0
+		TC #1/4:	                                          -Fio IOPS (total):	  17944     	  6524     	  1098
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.359s	 1m2.445s	 1m18.159s
+		TC #2/4:	                                          -Logical data size: 	  4097MiB  	  4097MiB  	  16390MiB
+		TC #2/4:	                                          -Actual data size:  	  771MiB  	  4099MiB  	  16396MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  70.7 MiB/s	  101.7 MiB/s	  1848.9 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  70.7 MiB/s	  1628.5 MiB/s	  1848.9 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  18121.0     	  1627.9     	  1848.0
+		TC #2/4:	                                          -Fio IOPS (total):	  18121     	  26047     	  1848
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m0.835s	 1m6.525s	 1m15.992s
+		TC #3/4:	                                          -Logical data size: 	  4097MiB  	  4098MiB  	  16392MiB
+		TC #3/4:	                                          -Actual data size:  	  452MiB  	  4100MiB  	  16400MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  18.9 MiB/s	  12.1 MiB/s	  341.9 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  18.9 MiB/s	  194.3 MiB/s	  341.9 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  4845.0     	  193.8     	  341.0
+		TC #3/4:	                                          -Fio IOPS (total):	  4845     	  3101     	  341
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m0.341s	 1m3.506s	 1m16.694s
+		TC #4/4:	                                          -Logical data size: 	  4098MiB  	  4098MiB  	  16392MiB
+		TC #4/4:	                                          -Actual data size:  	  760MiB  	  4100MiB  	  16400MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  59.6 MiB/s	  93.3 MiB/s	  2064.4 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  59.6 MiB/s	  1493.4 MiB/s	  2064.4 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  15260.0     	  1492.8     	  2064.0
+		TC #4/4:	                                          -Fio IOPS (total):	  15260     	  23886     	  2064
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	512k
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m0.620s	 1m6.273s	 1m4.607s
+		TC #1/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16385MiB
+		TC #1/4:	                                          -Actual data size:  	  4097MiB  	  4096MiB  	  16387MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  9.2 MiB/s	  13.8 MiB/s	  1371.5 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  9.2 MiB/s	  221.3 MiB/s	  1371.5 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  2377.0     	  220.8     	  1371.0
+		TC #1/4:	                                          -Fio IOPS (total):	  2377     	  3534     	  1371
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.341s	 1m11.309s	 1m5.351s
+		TC #2/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16385MiB
+		TC #2/4:	                                          -Actual data size:  	  421MiB  	  4096MiB  	  16387MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  35.2 MiB/s	  35.4 MiB/s	  889.7 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  35.2 MiB/s	  567.1 MiB/s	  889.7 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  9013.0     	  566.6     	  889.0
+		TC #2/4:	                                          -Fio IOPS (total):	  9013     	  9066     	  889
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m0.406s	 1m31.374s	 1m17.127s
+		TC #3/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16386MiB
+		TC #3/4:	                                          -Actual data size:  	  212MiB  	  4097MiB  	  16388MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  9.6 MiB/s	  5.3 MiB/s	  338.8 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  9.6 MiB/s	  85.7 MiB/s	  338.8 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  2463.0     	  85.4     	  338.0
+		TC #3/4:	                                          -Fio IOPS (total):	  2463     	  1367     	  338
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m0.517s	 1m2.597s	 1m19.308s
+		TC #4/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16386MiB
+		TC #4/4:	                                          -Actual data size:  	  389MiB  	  4097MiB  	  16388MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  31.4 MiB/s	  28.8 MiB/s	  1750.1 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  31.4 MiB/s	  460.8 MiB/s	  1750.1 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  8051.0     	  460.3     	  1750.0
+		TC #4/4:	                                          -Fio IOPS (total):	  8051     	  7366     	  1750
+	Pool name:        	zpool-on-NVMe-PCIe4x4 (which has ashift=13)
+	Recordsize:       	1M
+		TC #1/4:			COMPoffENCoff-000-xxx   off / off        	 1m0.556s	 1m7.271s	 1m2.684s
+		TC #1/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16384MiB
+		TC #1/4:	                                          -Actual data size:  	  4096MiB  	  4096MiB  	  16385MiB
+		TC #1/4:	                                          -Fio BW (/proc):  	  7.5 MiB/s	  9.8 MiB/s	  1981.1 MiB/s
+		TC #1/4:	                                          -Fio BW (total):  	  7.5 MiB/s	  158.1 MiB/s	  1981.1 MiB/s
+		TC #1/4:	                                          -Fio IOPS (/proc):	  1945.0     	  157.7     	  1981.0
+		TC #1/4:	                                          -Fio IOPS (total):	  1945     	  2524     	  1981
+		TC #2/4:			COMPlz4ENCoff-000-xxx   lz4 / off        	 1m0.333s	 1m12.487s	 1m5.678s
+		TC #2/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16384MiB
+		TC #2/4:	                                          -Actual data size:  	  295MiB  	  4096MiB  	  16385MiB
+		TC #2/4:	                                          -Fio BW (/proc):  	  23.4 MiB/s	  18.4 MiB/s	  959.5 MiB/s
+		TC #2/4:	                                          -Fio BW (total):  	  23.4 MiB/s	  295.4 MiB/s	  959.5 MiB/s
+		TC #2/4:	                                          -Fio IOPS (/proc):	  6002.0     	  295.1     	  959.0
+		TC #2/4:	                                          -Fio IOPS (total):	  6002     	  4722     	  959
+		TC #3/4:			COMPlz4ENCaes-256-ccm   lz4 / aes-256-ccm	 1m0.405s	 1m32.572s	 1m12.334s
+		TC #3/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16385MiB
+		TC #3/4:	                                          -Actual data size:  	  169MiB  	  4096MiB  	  16386MiB
+		TC #3/4:	                                          -Fio BW (/proc):  	  6.2 MiB/s	  3.5 MiB/s	  363.9 MiB/s
+		TC #3/4:	                                          -Fio BW (total):  	  6.2 MiB/s	  56.6 MiB/s	  363.9 MiB/s
+		TC #3/4:	                                          -Fio IOPS (/proc):	  1602.0     	  56.0     	  363.0
+		TC #3/4:	                                          -Fio IOPS (total):	  1602     	  897     	  363
+		TC #4/4:			COMPlz4ENCaes-256-gcm   lz4 / aes-256-gcm	 1m0.616s	 1m1.473s	 1m19.597s
+		TC #4/4:	                                          -Logical data size: 	  4096MiB  	  4096MiB  	  16385MiB
+		TC #4/4:	                                          -Actual data size:  	  274MiB  	  4096MiB  	  16386MiB
+		TC #4/4:	                                          -Fio BW (/proc):  	  20.9 MiB/s	  12.4 MiB/s	  2121.3 MiB/s
+		TC #4/4:	                                          -Fio BW (total):  	  20.9 MiB/s	  198.8 MiB/s	  2121.3 MiB/s
+		TC #4/4:	                                          -Fio IOPS (/proc):	  5356.0     	  198.3     	  2121.0
+		TC #4/4:	                                          -Fio IOPS (total):	  5356     	  3173     	  2121
