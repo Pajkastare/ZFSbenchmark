@@ -57,7 +57,7 @@ test results will be less accurate, if other programs are competing for the
 same computer resources that this test script uses).
 
 
-# A note aboute older versions
+# A note about older versions
 The original version of the main measurement script accurately measured
 bytes actually used on the zpool after each test case, but it failed
 to present the actual, accurate write speeds (but it did show the
