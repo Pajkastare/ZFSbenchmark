@@ -32,6 +32,7 @@
 # The values that are _supposed_ to be stored in that file are these, and these only:
 #	POOLNAME
 #	BENCHMARKROOTDS
+#	TESTROOTDS
 #	TESTRUNTIME
 #	SPECIFY_ZFS_COMMON_OPTIONS
 #	COMMON_ZFS_OPTIONS
